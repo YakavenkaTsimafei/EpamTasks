@@ -19,7 +19,6 @@ public class Runner {
                 maxTotalCost = trip;
             }
             trip.show();
-
         }
         trips[trips.length - 1].setTransportCost(150);
         for (BusinessTrip trip : trips) {
