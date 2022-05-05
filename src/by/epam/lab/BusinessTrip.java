@@ -4,7 +4,7 @@ public class BusinessTrip {
     private String employeeAccount;
     private int transportCost;
     private int days;
-    private static final int DAILY_RATE = 95;
+    private final static int DAILY_RATE = 95;
 
     public BusinessTrip() {
     }
@@ -57,6 +57,6 @@ public class BusinessTrip {
     }
 
     public String toByn(int coins) {
-        return String.format("%d.%02d", coins / 100, coins % 100 );
+        return String.format("%d.%02d", coins / 100, coins % 100);
     }
 }
