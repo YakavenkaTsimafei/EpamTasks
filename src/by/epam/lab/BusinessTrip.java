@@ -49,14 +49,14 @@ public class BusinessTrip {
     }
 
     public void show() {
-        System.out.println("Account = " + employeeAccount + "\n" +
-                "Daily rate = " + toByn(DAILY_RATE) + "\n" +
-                "Transport = " + toByn(transportCost) + "\n" +
-                "Days = " + days + "\n" +
-                "General expenses = " + toByn(getTotalCoast()) + "\n");
+        System.out.println("Account = " + employeeAccount +
+                "\nDaily rate = " + toByn(DAILY_RATE) +
+                "\nTransport = " + toByn(transportCost) +
+                "\nDays = " + days +
+                "\nGeneral expenses = " + toByn(getTotalCoast()) + "\n");
     }
 
-    public String toByn(int c) {
-        return c / 100 + "." + (c % 100) / 10 + c % 10;
+    public String toByn(int coins) {
+        return String.format("%d.%d%d", coins / 100, (coins % 100) / 10, coins % 10);
     }
 }

@@ -12,18 +12,21 @@ public class Runner {
 
         BusinessTrip maxTotalCost = trips[0];
         for (BusinessTrip trip : trips) {
-            if (trip != null) {
-                trip.show();
-                if (trip.getTotalCoast() > maxTotalCost.getTotalCoast()) {
-                    maxTotalCost = trip;
-                }
+            if (trip == null) {
+                continue;
             }
+            if (trip.getTotalCoast() > maxTotalCost.getTotalCoast()) {
+                maxTotalCost = trip;
+            }
+            trip.show();
+
         }
-        System.out.println("Max = " + maxTotalCost + "\n");
         trips[trips.length - 1].setTransportCost(150);
-        System.out.println("Duration = " + (trips[0].getDays() + trips[1].getDays()) + "\n");
         for (BusinessTrip trip : trips) {
             System.out.println(trip);
         }
+        System.out.println("\nMax = " + maxTotalCost);
+        trips[trips.length - 1].setTransportCost(150);
+        System.out.println("\nDuration = " + (trips[0].getDays() + trips[1].getDays()));
     }
 }
