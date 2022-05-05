@@ -4,10 +4,10 @@ public class Runner {
 
     public static void main(String[] args) {
 
-        BusinessTrip[] trips = {new BusinessTrip("Anton", 163, 7),
-                new BusinessTrip("Lena", 85, 101),
+        BusinessTrip[] trips = {new BusinessTrip("Anton", 5, 7),
+                new BusinessTrip("Lena", 305, 101),
                 null,
-                new BusinessTrip("Dima", 95, 3),
+                new BusinessTrip("Dima", 100, 3),
                 new BusinessTrip()};
 
         BusinessTrip maxTotalCost = trips[0];

@@ -57,10 +57,6 @@ public class BusinessTrip {
     }
 
     public String toByn(int c) {
-        int a = c / 100;
-        int b = c % 100;
-        if (b / 10 == 0) {
-            return a + "." + "0" + b;
-        } else return a + "." + b;
+        return c / 100 + "." + (c % 100) / 10 + c % 10;
     }
 }
