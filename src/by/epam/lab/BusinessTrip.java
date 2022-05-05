@@ -57,6 +57,6 @@ public class BusinessTrip {
     }
 
     public String toByn(int coins) {
-        return String.format("%d.%d%d", coins / 100, (coins % 100) / 10, coins % 10);
+        return String.format("%d.%02d", coins / 100, coins % 100 );
     }
 }

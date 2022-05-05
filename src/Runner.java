@@ -20,12 +20,12 @@ public class Runner {
             }
             trip.show();
         }
-        trips[trips.length - 1].setTransportCost(150);
-        for (BusinessTrip trip : trips) {
-            System.out.println(trip);
-        }
+
         System.out.println("\nMax = " + maxTotalCost);
         trips[trips.length - 1].setTransportCost(150);
         System.out.println("\nDuration = " + (trips[0].getDays() + trips[1].getDays()));
+        for (BusinessTrip trip : trips) {
+            System.out.println(trip);
+        }
     }
 }
