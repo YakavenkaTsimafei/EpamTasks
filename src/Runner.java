@@ -8,7 +8,7 @@ public class Runner {
 
         Subject subject = new Subject("wire", material, 0.03);
         System.out.println(subject);
-        material.setName("cooper");
+        material.setName("copper");
         material.setDensity(8500);
         System.out.println(subject);
     }

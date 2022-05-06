@@ -5,6 +5,10 @@ public class Subject {
     private Material material;
     private double volume;
 
+    public Subject() {
+
+    }
+
     public Subject(String name, Material material, double volume) {
         this.name = name;
         this.material = material;
@@ -38,9 +42,10 @@ public class Subject {
     @Override
     public String toString() {
         return
-                name + ";" + material + ";" + volume+";"+getGetMass();
+                name + ";" + material + ";" + volume + ";" + getMass();
     }
-    public double getGetMass() {
+
+    public double getMass() {
         return material.getDensity() * volume;
 
     }
