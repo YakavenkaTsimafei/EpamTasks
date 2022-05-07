@@ -4,6 +4,11 @@ public class Material {
     private final String name;
     private final double density;
 
+    public Material() {
+        name="";
+        density=0;
+    }
+
     public Material(String name, double density) {
         this.name = name;
         this.density = density;
