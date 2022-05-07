@@ -5,8 +5,8 @@ public class Material {
     private final double density;
 
     public Material() {
-        name="";
-        density=0;
+        name = "";
+        density = 0;
     }
 
     public Material(String name, double density) {
