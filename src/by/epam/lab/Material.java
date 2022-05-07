@@ -1,12 +1,8 @@
 package by.epam.lab;
 
 public class Material {
-    private String name;
-    private double density;
-
-    public Material() {
-
-    }
+    private final String name;
+    private final double density;
 
     public Material(String name, double density) {
         this.name = name;
@@ -17,20 +13,12 @@ public class Material {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getDensity() {
         return density;
     }
 
-    public void setDensity(double density) {
-        this.density = density;
-    }
-
     @Override
     public String toString() {
-        return name + ";" +density;
+        return name + ";" + density;
     }
 }
