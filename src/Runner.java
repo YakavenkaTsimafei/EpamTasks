@@ -1,7 +1,6 @@
 import by.epam.lab.Material;
 import by.epam.lab.Subject;
 
-
 public class Runner {
     public static void main(String[] args) {
         Subject wire = new Subject("wire", Material.STEEL, 0.03);

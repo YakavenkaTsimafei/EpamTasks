@@ -5,7 +5,6 @@ public enum Material {
 
     private final double density;
 
-
     Material(double density) {
 
         this.density = density;
