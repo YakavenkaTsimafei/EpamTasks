@@ -1,20 +1,18 @@
 package by.epam.lab;
 
-public class Material {
-    private final String name;
+public enum Material {
+    STEEL(7850), COPPER(8500);
+
     private final double density;
 
-    public Material() {
-        this(null, 0.0);
-    }
 
-    public Material(String name, double density) {
-        this.name = name;
+    Material(double density) {
+
         this.density = density;
     }
 
     public String getName() {
-        return name;
+        return name();
     }
 
     public double getDensity() {
@@ -23,6 +21,6 @@ public class Material {
 
     @Override
     public String toString() {
-        return name + ";" + density;
+        return name() + ";" + density;
     }
 }

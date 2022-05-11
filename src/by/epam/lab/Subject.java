@@ -2,14 +2,14 @@ package by.epam.lab;
 
 public class Subject {
     private String name;
-    private MaterialEnum material;
+    private Material material;
     private double volume;
 
     public Subject() {
 
     }
 
-    public Subject(String name, MaterialEnum material, double volume) {
+    public Subject(String name, Material material, double volume) {
         this.name = name;
         this.material = material;
         this.volume = volume;
@@ -23,11 +23,11 @@ public class Subject {
         this.name = name;
     }
 
-    public MaterialEnum getMaterial() {
+    public Material getMaterial() {
         return material;
     }
 
-    public void setMaterial(MaterialEnum material) {
+    public void setMaterial(Material material) {
         this.material = material;
     }
 
