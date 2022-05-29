@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) throws FileNotFoundException {
-        try (Scanner sc = new Scanner(new FileReader("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\in.txt"))) {
+        try (Scanner sc = new Scanner(new FileReader("src\\in.txt"))) {
 
             int[] PURCHASES_NUMBER = new int[11];
             Purchase[] purchase = new Purchase[11];
@@ -35,11 +35,11 @@ public class Runner {
                 g++;
             }
             int h = 0;
-            int averageCost = 0;
+            int generalCost = 0;
             int totalNumber = 0;
             int minPercent = purchase[0].getPercent();
             for (int i = 0; i < purchase.length; i++) {
-                averageCost += purchase[i].getCost();
+                generalCost += purchase[i].getCost();
                 totalNumber += purchase[i].getNumber();
                 if (purchase[i].getPercent() < minPercent)
                     minPercent = purchase[i].getPercent();
@@ -50,15 +50,13 @@ public class Runner {
                     h = i;
                 }
             }
-            double u = ((double) averageCost / (double) totalNumber);
+            double averageCost = ((double) generalCost / (double) totalNumber);
             Arrays.sort(purchase);
             System.out.println("Shopping on Monday = " + amountMonday);
             System.out.println("Maximum purchase price : " + purchase[h]);
-            System.out.printf("Average cost = %.3f", u);
-            for (int i = 0; i <purchase.length ; i++) {
-                int index= Arrays.binarySearch(purchase,0,purchase.length,5);
-                System.out.println(index);
-            }
+            System.out.printf("Average cost = %.3f\n", averageCost);
+            int index = Arrays.binarySearch(purchase, new Purchase(5, 3, weekDays[2]));
+            System.out.println("Purchase number with 5 items: " + index);
 
         } catch (FileNotFoundException e) {
             System.err.println("Input file is not found");

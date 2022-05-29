@@ -2,7 +2,7 @@ package by.epam.lab;
 
 public class Purchase implements Comparable<Purchase> {
     private final String name = "Milk";
-    private final int price = 3;
+    private final double price = 2.55;
     private int number;
     private int percent;
     private WeekDay weekDay;
@@ -21,7 +21,7 @@ public class Purchase implements Comparable<Purchase> {
         return name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -56,13 +56,11 @@ public class Purchase implements Comparable<Purchase> {
 
     @Override
     public int compareTo(Purchase purchase) {
-        if (number < purchase.number) return 1;
-        else if (number > purchase.number) return -1;
-        else return 0;
+        return this.number - purchase.number;
     }
 
     public int getCost() {
-        return price * number * (100 - percent) / 100;
+        return (int) (price * number * (100 - percent) / 100);
     }
 }
 
