@@ -7,57 +7,49 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Runner {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         try (Scanner sc = new Scanner(new FileReader("src\\in.txt"))) {
-
-            int[] PURCHASES_NUMBER = new int[11];
-            Purchase[] purchase = new Purchase[11];
+            final int PURCHASES_NUMBER = sc.nextInt();
+            Purchase[] purchase = new Purchase[PURCHASES_NUMBER];
+            int[] arrayForInitialize = new int[3];
             WeekDay[] weekDays = WeekDay.values();
             int amountMonday = 0;
             int g = 0;
-
+            sc.nextLine();
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 String[] number = line.split(" ");
                 for (int i = 0; i < number.length; i++) {
-                    PURCHASES_NUMBER[i] = Integer.parseInt(number[i]);
+                    arrayForInitialize[i] = Integer.parseInt(number[i]);
                 }
-
-                purchase[g] = new Purchase(PURCHASES_NUMBER[1], PURCHASES_NUMBER[2], weekDays[PURCHASES_NUMBER[3]]);
-                if (g == 0) {
-                    System.out.println("Product : " + purchase[0].getName() +
-                            "\nPrice = " + purchase[0].getPrice());
-                }
-                System.out.println(PURCHASES_NUMBER[0] + ";" + purchase[g]);
-                if (PURCHASES_NUMBER[3] == 1) {
-                    amountMonday += purchase[g].getCost();
-                }
+                purchase[g] = new Purchase(arrayForInitialize[0], arrayForInitialize[1], weekDays[arrayForInitialize[2]]);
                 g++;
             }
             int h = 0;
             int generalCost = 0;
             int totalNumber = 0;
-            int minPercent = purchase[0].getPercent();
+            int maxCost = purchase[0].getCost();
+            System.out.println("Product : " + purchase[0].getName() + "\nPrice = " + purchase[0].getPrice());
             for (int i = 0; i < purchase.length; i++) {
+                System.out.println(purchase[i]);
                 generalCost += purchase[i].getCost();
                 totalNumber += purchase[i].getNumber();
-                if (purchase[i].getPercent() < minPercent)
-                    minPercent = purchase[i].getPercent();
-            }
-            for (int i = 0; i < purchase.length; i++) {
-
-                if (purchase[i].getPercent() == minPercent) {
-                    h = i;
+                if (purchase[i].getWeekDay() == WeekDay.MONDAY) {
+                    amountMonday += purchase[i].getCost();
                 }
+                if (purchase[i].getCost()>maxCost){
+                    maxCost=purchase[i].getCost();
+                    h=i;
+                }
+
             }
             double averageCost = ((double) generalCost / (double) totalNumber);
-            Arrays.sort(purchase);
-            System.out.println("Shopping on Monday = " + amountMonday);
+            System.out.printf("Shopping on Monday = %d\n", amountMonday / 100);
             System.out.println("Maximum purchase price : " + purchase[h]);
-            System.out.printf("Average cost = %.3f\n", averageCost);
-            int index = Arrays.binarySearch(purchase, new Purchase(5, 3, weekDays[2]));
-            System.out.println("Purchase number with 5 items: " + index);
-
+            System.out.printf("Average cost =%.3f\n", averageCost / 100);
+            Arrays.sort(purchase);
+            int index = Arrays.binarySearch(purchase, new Purchase(5, 0, null));
+            System.out.println("Purchase with 5 items: " + purchase[index]);
         } catch (FileNotFoundException e) {
             System.err.println("Input file is not found");
         }

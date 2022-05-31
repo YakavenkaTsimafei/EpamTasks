@@ -1,8 +1,8 @@
 package by.epam.lab;
 
 public class Purchase implements Comparable<Purchase> {
-    private final String name = "Milk";
-    private final double price = 2.55;
+    private static final String name = "Milk";
+    private static final int price = 300;
     private int number;
     private int percent;
     private WeekDay weekDay;
@@ -21,7 +21,7 @@ public class Purchase implements Comparable<Purchase> {
         return name;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
@@ -51,7 +51,7 @@ public class Purchase implements Comparable<Purchase> {
 
     @Override
     public String toString() {
-        return number + ";" + percent + ";" + getCost() + ";" + weekDay;
+        return number + ";" + percent + ";" + toByn(getCost()) + ";" + weekDay;
     }
 
     @Override
@@ -60,8 +60,13 @@ public class Purchase implements Comparable<Purchase> {
     }
 
     public int getCost() {
-        return (int) (price * number * (100 - percent) / 100);
+        return (price * number * (100 - percent) / 100);
     }
+
+    public String toByn(int coins) {
+        return String.format("%d", (coins / 100));
+    }
+
 }
 
 
