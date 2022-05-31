@@ -41,6 +41,7 @@ public class Purchase implements Comparable<Purchase> {
         this.percent = percent;
     }
 
+
     public WeekDay getWeekDay() {
         return weekDay;
     }

@@ -41,8 +41,8 @@ public class Runner {
                 }
             }
             double averageCost = ((double) generalCost / PURCHASES_NUMBER);
-            System.out.printf("Shopping on Monday = %d\n", amountMonday / 100);
-            System.out.println("Maximum purchase price : " + purchase[h]);
+            System.out.printf("Shopping on Monday = %d.00\n", amountMonday / 100);
+            System.out.println("Day with max purchase : " + h);
             System.out.printf("Average cost =%.3f\n", averageCost / 100);
             Arrays.sort(purchase);
             int index = Arrays.binarySearch(purchase, new Purchase(5, 0, null));
