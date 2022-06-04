@@ -1,28 +1,24 @@
 package by.epam.lab;
 
 public class Purchase implements Comparable<Purchase> {
-    private static final String NAME = "Milk";
-    private static final int PRICE = 300;
+    public static final String NAME = "Milk";
+    public static final int PRICE = 300;
     private int number;
-    private int percent;
-    private WeekDay weekDay;
+    private double percent;
+    private WeekDay day;
 
     public Purchase() {
 
     }
 
-    public Purchase(int number, int percent, WeekDay weekDay) {
+    public Purchase(int number, double percent, WeekDay day) {
         this.number = number;
         this.percent = percent;
-        this.weekDay = weekDay;
+        this.day = day;
     }
 
-    public String getName() {
-        return NAME;
-    }
-
-    public int getPrice() {
-        return PRICE;
+    public Purchase(int number, double percent, int day) {
+        this(number, percent, WeekDay.values()[day]);
     }
 
     public int getNumber() {
@@ -33,7 +29,7 @@ public class Purchase implements Comparable<Purchase> {
         this.number = number;
     }
 
-    public int getPercent() {
+    public double getPercent() {
         return percent;
     }
 
@@ -41,18 +37,17 @@ public class Purchase implements Comparable<Purchase> {
         this.percent = percent;
     }
 
-
-    public WeekDay getWeekDay() {
-        return weekDay;
+    public WeekDay getDay() {
+        return day;
     }
 
-    public void setWeekDay(WeekDay weekDay) {
-        this.weekDay = weekDay;
+    public void setDay(WeekDay day) {
+        this.day = day;
     }
 
     @Override
     public String toString() {
-        return number + ";" + percent + ";" + toByn((int) (Math.floor(getCost() / 100)) * 100) + ";" + weekDay;
+        return number + ";" + percent + ";" + toByn((int) Math.round(getCost() / 100) * 100) + ";" + day;
     }
 
     @Override
@@ -60,8 +55,8 @@ public class Purchase implements Comparable<Purchase> {
         return this.number - purchase.number;
     }
 
-    public int getCost() {
-        return ((PRICE * number * (100 - percent) / 100));
+    public double getCost() {
+        return (PRICE * number * (100 - percent) / 100);
     }
 
     public String toByn(int coins) {

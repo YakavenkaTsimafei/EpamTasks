@@ -12,41 +12,46 @@ public class Runner {
             final int PURCHASES_NUMBER = sc.nextInt();
             Purchase[] purchase = new Purchase[PURCHASES_NUMBER];
             int[] arrayForInitialize = new int[3];
-            WeekDay[] weekDays = WeekDay.values();
             int amountMonday = 0;
             int g = 0;
-            sc.nextLine();
+            if (PURCHASES_NUMBER != 0)
+                sc.nextLine();
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 String[] number = line.split(" ");
                 for (int i = 0; i < number.length; i++) {
                     arrayForInitialize[i] = Integer.parseInt(number[i]);
                 }
-                purchase[g] = new Purchase(arrayForInitialize[0], arrayForInitialize[1], weekDays[arrayForInitialize[2]]);
+                purchase[g] = new Purchase(arrayForInitialize[0], arrayForInitialize[1], arrayForInitialize[2]);
                 g++;
             }
-            int h = 0;
+            WeekDay WeekDayMaxCostDay = null;
             int generalCost = 0;
-            int maxCost = purchase[0].getCost();
-            System.out.println("Product : " + purchase[0].getName() + "\nPrice = " + purchase[0].getPrice());
-            for (int i = 0; i < purchase.length; i++) {
-                System.out.println(purchase[i]);
-                generalCost += purchase[i].getCost();
-                if (purchase[i].getWeekDay() == WeekDay.MONDAY) {
-                    amountMonday += purchase[i].getCost();
+            int maxCost = 0;
+            double averageCost = 0;
+            System.out.println("Product : " + Purchase.NAME + "\nPrice = " + Purchase.PRICE);
+            for (Purchase p : purchase) {
+                System.out.println(p);
+                int cost = (int) p.getCost();
+                generalCost += cost;
+                if (p.getDay() == WeekDay.MONDAY) {
+                    amountMonday += Math.floor(cost / 100) * 100;
                 }
-                if (purchase[i].getCost() > maxCost) {
-                    maxCost = purchase[i].getCost();
-                    h = i;
+                if (cost > maxCost) {
+                    maxCost = cost;
+                    WeekDayMaxCostDay = p.getDay();
                 }
             }
-            double averageCost = ((double) generalCost / PURCHASES_NUMBER);
+            if (purchase.length > 0) {
+                averageCost = ((double) generalCost / purchase.length);
+            }
             System.out.printf("Shopping on Monday = %d.00\n", amountMonday / 100);
-            System.out.println("Day with max purchase : " + purchase[h].getWeekDay());
+            System.out.println("Day with max purchase : " + WeekDayMaxCostDay);
             System.out.printf("Average cost =%.3f\n", averageCost / 100);
             Arrays.sort(purchase);
             int index = Arrays.binarySearch(purchase, new Purchase(5, 0, null));
-            System.out.println("Purchase with 5 items: " + purchase[index]);
+            if (index == 1) System.out.println("Purchase with 5 items: " + purchase[index]);
+            else System.out.println("The desired element is not in the array");
             for (Purchase p : purchase) {
                 System.out.println(p);
             }
