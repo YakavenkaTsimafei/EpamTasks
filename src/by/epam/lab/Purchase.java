@@ -1,6 +1,6 @@
 package by.epam.lab;
 
-import static by.epam.lab.ToByn.toByn;
+import static by.epam.lab.Utils.toByn;
 
 public class Purchase implements Comparable<Purchase> {
     public static final String NAME = "Milk";
@@ -61,7 +61,7 @@ public class Purchase implements Comparable<Purchase> {
         return (int) Math.round(PRICE * number * (100 - percent) / 10000) * 100;
     }
 
-
 }
+
 
 

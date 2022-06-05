@@ -19,9 +19,7 @@ public class Runner {
             int maxCost = 0;
             int amountMonday = 0;
             double averageCost = 0;
-            System.out.println("Product : " + Purchase.NAME + "\nPrice = " + Purchase.PRICE);
             for (Purchase p : purchase) {
-                System.out.println(p);
                 int cost = (int) p.getCost();
                 generalCost += cost;
                 if (p.getDay() == WeekDay.MONDAY) {
@@ -35,6 +33,7 @@ public class Runner {
             if (purchase.length > 0) {
                 averageCost = ((double) generalCost / purchase.length);
             }
+            dataOutput(purchase);
             System.out.printf("Shopping on Monday = %d.00\n", amountMonday / 100);
             System.out.println("Day with max purchase : " + WeekDayMaxCostDay);
             System.out.printf("Average cost =%.3f\n", averageCost / 100);
@@ -45,12 +44,22 @@ public class Runner {
             for (Purchase p : purchase) {
                 System.out.println(p);
             }
+
         } catch (FileNotFoundException e) {
             System.err.println("Input file is not found");
         }
 
     }
 
+    private static void dataOutput(Purchase[] purchase) {
+        System.out.println("Product : " + Purchase.NAME + "\nPrice = " + Purchase.PRICE);
+        for (Purchase p : purchase) {
+            System.out.println(p);
+
+        }
+    }
 }
+
+
 
 
