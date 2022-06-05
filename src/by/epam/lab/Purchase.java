@@ -1,5 +1,7 @@
 package by.epam.lab;
 
+import static by.epam.lab.ToByn.toByn;
+
 public class Purchase implements Comparable<Purchase> {
     public static final String NAME = "Milk";
     public static final int PRICE = 300;
@@ -47,7 +49,7 @@ public class Purchase implements Comparable<Purchase> {
 
     @Override
     public String toString() {
-        return number + ";" + percent + ";" + toByn((int) Math.round(getCost() / 100) * 100) + ";" + day;
+        return number + ";" + percent + ";" + toByn((int) getCost()) + ";" + day;
     }
 
     @Override
@@ -56,12 +58,9 @@ public class Purchase implements Comparable<Purchase> {
     }
 
     public double getCost() {
-        return (PRICE * number * (100 - percent) / 100);
+        return (int) Math.round(PRICE * number * (100 - percent) / 10000) * 100;
     }
 
-    public String toByn(int coins) {
-        return String.format("%d.%02d", (coins / 100), coins % 100);
-    }
 
 }
 

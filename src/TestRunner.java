@@ -2,6 +2,7 @@ import by.epam.lab.Purchase;
 import by.epam.lab.WeekDay;
 import org.junit.jupiter.api.Test;
 
+import static by.epam.lab.ToByn.toByn;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestRunner {
@@ -14,7 +15,7 @@ class TestRunner {
         assertEquals(200, Math.floor(purchase.getCost() / 100) * 100);
         assertEquals(300, Math.ceil(purchase.getCost() / 100) * 100);
         Purchase purchase1 = new Purchase(1, 2.5, 3);
-        assertEquals(292.5, purchase1.getCost());
+        assertEquals(300, purchase1.getCost());
     }
 
     @Test
@@ -28,12 +29,11 @@ class TestRunner {
 
     @Test
     public void testToByn() {
-        Purchase purchase = new Purchase();
-        assertEquals("3.50", purchase.toByn(350));
-        assertEquals("3.05", purchase.toByn(305));
-        assertEquals("3.00", purchase.toByn(300));
-        assertEquals("0.05", purchase.toByn(5));
-        assertEquals("0.00", purchase.toByn(0));
-        assertEquals("1005.00", purchase.toByn(100500));
+        assertEquals("3.50", toByn(350));
+        assertEquals("3.05", toByn(305));
+        assertEquals("3.00", toByn(300));
+        assertEquals("0.05", toByn(5));
+        assertEquals("0.00", toByn(0));
+        assertEquals("1005.00", toByn(100500));
     }
 }

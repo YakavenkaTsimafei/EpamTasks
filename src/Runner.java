@@ -11,23 +11,13 @@ public class Runner {
         try (Scanner sc = new Scanner(new FileReader("src\\in.txt"))) {
             final int PURCHASES_NUMBER = sc.nextInt();
             Purchase[] purchase = new Purchase[PURCHASES_NUMBER];
-            int[] arrayForInitialize = new int[3];
-            int amountMonday = 0;
-            int g = 0;
-            if (PURCHASES_NUMBER != 0)
-                sc.nextLine();
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                String[] number = line.split(" ");
-                for (int i = 0; i < number.length; i++) {
-                    arrayForInitialize[i] = Integer.parseInt(number[i]);
-                }
-                purchase[g] = new Purchase(arrayForInitialize[0], arrayForInitialize[1], arrayForInitialize[2]);
-                g++;
+            for (int i = 0; i < PURCHASES_NUMBER; i++) {
+                purchase[i] = new Purchase(sc.nextInt(), sc.nextDouble(), sc.nextInt());
             }
             WeekDay WeekDayMaxCostDay = null;
             int generalCost = 0;
             int maxCost = 0;
+            int amountMonday = 0;
             double averageCost = 0;
             System.out.println("Product : " + Purchase.NAME + "\nPrice = " + Purchase.PRICE);
             for (Purchase p : purchase) {
@@ -35,7 +25,7 @@ public class Runner {
                 int cost = (int) p.getCost();
                 generalCost += cost;
                 if (p.getDay() == WeekDay.MONDAY) {
-                    amountMonday += Math.floor(cost / 100) * 100;
+                    amountMonday += cost;
                 }
                 if (cost > maxCost) {
                     maxCost = cost;
