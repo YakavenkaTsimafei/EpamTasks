@@ -17,6 +17,7 @@ public class Runner {
             for (int i = 0; i < PURCHASES_NUMBER; i++) {
                 purchases[i] = new Purchase(sc.nextInt(), sc.nextDouble(), sc.nextInt());
             }
+            dataOutput(purchases);
             WeekDay maxCostWeekDay = null;
             int generalCost = 0;
             int maxCost = 0;
@@ -36,13 +37,12 @@ public class Runner {
             if (purchases.length > 0) {
                 averageCost = (double) generalCost / purchases.length;
             }
-            dataOutput(purchases);
             System.out.printf("Shopping on Monday = %s\n", Utils.toByn(amountMonday));
             System.out.println("Day with max purchases : " + maxCostWeekDay);
             System.out.printf("Average cost =%.3f\n", averageCost / 100);
             Arrays.sort(purchases);
             int index = Arrays.binarySearch(purchases, new Purchase(5, 0, null));
-            if (index >= 0) System.out.println("Purchase with 5 items: " + purchases[index]);
+            if (index >= 0){ System.out.println("Purchase with 5 items: " + purchases[index]);}
             else System.out.println("The desired element is not in the array");
             dataOutput(purchases);
 
@@ -53,7 +53,7 @@ public class Runner {
     }
 
     private static void dataOutput(Purchase[] purchase) {
-        System.out.println("Product : " + Purchase.NAME + "\nPrice = " + Purchase.PRICE);
+        System.out.println("Product : " +Purchase.NAME + "\nPrice = " + Purchase.PRICE);
         for (Purchase p : purchase) {
             System.out.println(p);
 
