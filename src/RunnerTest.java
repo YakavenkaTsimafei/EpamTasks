@@ -1,6 +1,6 @@
 import by.epam.lab.Purchase;
 import by.epam.lab.WeekDay;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import static by.epam.lab.Utils.toByn;
 import static org.junit.jupiter.api.Assertions.assertEquals;
