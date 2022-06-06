@@ -21,14 +21,13 @@ public class RunnerTest {
         Purchase purchase1 = new Purchase(1, 10, 0);
         Purchase purchase = new Purchase(1, 10, WeekDay.SUNDAY);
         assertEquals(purchase1.toString(), purchase.toString());
-
-
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void purchaseWrongDay() {
         Purchase purchase = new Purchase(1, 10, 8);
     }
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void purchaseWrongNegativeDay() {
         Purchase purchase = new Purchase(1, 10, -2);

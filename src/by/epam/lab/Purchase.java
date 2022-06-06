@@ -47,9 +47,8 @@ public class Purchase implements Comparable<Purchase> {
         this.day = day;
     }
 
-    @Override
-    public String toString() {
-        return number + ";" + percent + ";" + toByn(getCost()) + ";" + day;
+    public int getCost() {
+        return (int) Math.round(PRICE * number * (100 - percent) / 10000) * 100;
     }
 
     @Override
@@ -57,8 +56,9 @@ public class Purchase implements Comparable<Purchase> {
         return this.number - purchase.number;
     }
 
-    public int getCost() {
-        return (int) Math.round(PRICE * number * (100 - percent) / 10000) * 100;
+    @Override
+    public String toString() {
+        return number + ";" + percent + ";" + toByn(getCost()) + ";" + day;
     }
 
 }

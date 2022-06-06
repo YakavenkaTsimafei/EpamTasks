@@ -1,6 +1,7 @@
 import by.epam.lab.Purchase;
 import by.epam.lab.Utils;
 import by.epam.lab.WeekDay;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
@@ -47,11 +48,9 @@ public class Runner {
                 System.out.println("The desired element is not in the array");
             }
             dataOutput(purchases);
-
         } catch (FileNotFoundException e) {
             System.err.println("Input file is not found");
         }
-
     }
 
     private static void dataOutput(Purchase[] purchase) {
