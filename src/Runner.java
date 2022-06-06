@@ -1,7 +1,6 @@
 import by.epam.lab.Purchase;
 import by.epam.lab.Utils;
 import by.epam.lab.WeekDay;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
@@ -10,7 +9,7 @@ import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) {
-        try (Scanner sc = new Scanner(new FileReader("src\\7in.txt"))) {
+        try (Scanner sc = new Scanner(new FileReader("src\\in.txt"))) {
             sc.useLocale(Locale.ENGLISH);
             final int PURCHASES_NUMBER = sc.nextInt();
             Purchase[] purchases = new Purchase[PURCHASES_NUMBER];
@@ -42,8 +41,11 @@ public class Runner {
             System.out.printf("Average cost =%.3f\n", averageCost / 100);
             Arrays.sort(purchases);
             int index = Arrays.binarySearch(purchases, new Purchase(5, 0, null));
-            if (index >= 0){ System.out.println("Purchase with 5 items: " + purchases[index]);}
-            else System.out.println("The desired element is not in the array");
+            if (index >= 0) {
+                System.out.println("Purchase with 5 items: " + purchases[index]);
+            } else {
+                System.out.println("The desired element is not in the array");
+            }
             dataOutput(purchases);
 
         } catch (FileNotFoundException e) {
@@ -53,7 +55,7 @@ public class Runner {
     }
 
     private static void dataOutput(Purchase[] purchase) {
-        System.out.println("Product : " +Purchase.NAME + "\nPrice = " + Purchase.PRICE);
+        System.out.println("Product : " + Purchase.NAME + "\nPrice = " + Utils.toByn(Purchase.PRICE));
         for (Purchase p : purchase) {
             System.out.println(p);
 

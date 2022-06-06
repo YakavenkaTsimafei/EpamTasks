@@ -29,6 +29,10 @@ public class RunnerTest {
     public void purchaseWrongDay() {
         Purchase purchase = new Purchase(1, 10, 8);
     }
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void purchaseWrongNegativeDay() {
+        Purchase purchase = new Purchase(1, 10, -2);
+    }
 
     @Test
     public void testToByn() {
