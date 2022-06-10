@@ -58,7 +58,7 @@ public class Purchase implements Comparable<Purchase> {
 
     @Override
     public String toString() {
-        return number + ";" + percent + ";" + toByn(getCost()) + ";" + day;
+        return number + ";" + percent + ";" + day + ";" + toByn(getCost());
     }
 
 }
