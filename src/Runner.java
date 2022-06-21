@@ -9,21 +9,25 @@ import java.util.Scanner;
 public class Runner {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(new FileReader("src\\in.txt"))) {
-            Purchase[] purchasesFactory = new Purchase[6];
+            Purchase[] purchases = new Purchase[6];
             int i = 0;
+            int purchaseNumberWithMaxCost =0;
+            int purchaseWithMaximumCost = 0;
             while (sc.hasNext()) {
-                purchasesFactory[i] = PurchasesFactory.getPurchaseFromFactory(sc);
+                purchases[i] = PurchasesFactory.getPurchaseFromFactory(sc);
+                if (purchases[i].getCost() > purchaseWithMaximumCost) {
+                    purchaseWithMaximumCost = purchases[i].getCost();
+                }
+                System.out.println(purchases[i]);
+                if (i > 0) {
+                    System.out.println(purchases[i].equals(purchases[i - 1]));
+                }
+                if (purchases[i].getCost()==purchaseWithMaximumCost){
+                    purchaseNumberWithMaxCost=i;
+                }
                 i++;
             }
-              //Arrays.sort(purchasesFactory);
-            for (int j = 0; j < purchasesFactory.length; j++) {
-                System.out.println(purchasesFactory[j]);
-            }
-//            System.out.println(purchasesFactory[3]);
-//            System.out.println(purchasesFactory[4]);
-            System.out.println(purchasesFactory[3].equals(purchasesFactory[4]));
-
-
+            System.out.println("Purchase with maximum Cost : " + purchases[purchaseNumberWithMaxCost]);
         } catch (FileNotFoundException e) {
             System.err.println("Input file is not found");
         }

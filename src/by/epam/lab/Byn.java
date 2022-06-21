@@ -2,7 +2,7 @@ package by.epam.lab;
 
 import static by.epam.lab.Utils.toByn;
 
-public class Byn  implements Comparable<Byn> {
+public class Byn implements Comparable<Byn> {
     private int costInKopecks;
 
     public Byn() {
@@ -14,7 +14,7 @@ public class Byn  implements Comparable<Byn> {
 
     @Override
     public int compareTo(Byn byn) {
-        return this.costInKopecks - byn.costInKopecks;
+        return byn.costInKopecks - this.costInKopecks;
     }
 
     @Override
