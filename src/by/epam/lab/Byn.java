@@ -12,6 +12,13 @@ public class Byn implements Comparable<Byn> {
         this.costInKopecks = costInKopecks;
     }
 
+    public int multiplication(int c) {
+        return costInKopecks * c;
+    }
+    public int difference(int c) {
+        return costInKopecks - c;
+    }
+
     @Override
     public int compareTo(Byn byn) {
         return byn.costInKopecks - this.costInKopecks;
@@ -20,7 +27,6 @@ public class Byn implements Comparable<Byn> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         Byn byn = (Byn) o;
         return costInKopecks == byn.costInKopecks;
     }

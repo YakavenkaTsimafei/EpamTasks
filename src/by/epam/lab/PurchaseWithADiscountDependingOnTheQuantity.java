@@ -15,7 +15,7 @@ public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
         this.discount = sc.nextDouble();
     }
 
-    public PurchaseWithADiscountDependingOnTheQuantity(String name, int price, int number, double discount) {
+    public PurchaseWithADiscountDependingOnTheQuantity(String name, Byn price, int number, double discount) {
         super(name, price, number);
         this.discount = discount;
     }
@@ -23,9 +23,9 @@ public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
     @Override
     public int getCost() {
         if (getNumber() >= DISCOUNT_QUANTITY) {
-            return (int) (getPrice() * getNumber() * (100 - discount) / 100);
+            return (int) (getPrice().multiplication(getNumber()) * (100 - discount) / 100);
         } else {
-            return (int) getPrice() * getNumber();
+            return (int) getPrice().multiplication(getNumber());
         }
     }
 

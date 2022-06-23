@@ -14,14 +14,14 @@ public class PurchaseWithADiscount extends Purchase {
         this.discount = sc.nextInt();
     }
 
-    public PurchaseWithADiscount(String name, int price, int number, int discount) {
+    public PurchaseWithADiscount(String name, Byn price, int number, int discount) {
         super(name, price, number);
         this.discount = discount;
     }
 
     @Override
     public int getCost() {
-        return (int) (getPrice() - discount) * getNumber();
+        return (int) (getPrice().difference(discount)) * getNumber();
     }
 
     @Override

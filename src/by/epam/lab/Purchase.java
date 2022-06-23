@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 import static by.epam.lab.Utils.toByn;
 
+
 public class Purchase {
     private String name;
-    private int price;
+    private Byn price;
     private int number;
 
     public Purchase() {
@@ -15,11 +16,11 @@ public class Purchase {
 
     public Purchase(Scanner sc) {
         this.name = sc.next();
-        this.price = sc.nextInt();
+        this.price = new Byn(sc.nextInt());
         this.number = sc.nextInt();
     }
 
-    public Purchase(String name, int price, int number) {
+    public Purchase(String name, Byn price, int number) {
         this.name = name;
         this.price = price;
         this.number = number;
@@ -33,11 +34,11 @@ public class Purchase {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Byn getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Byn price) {
         this.price = price;
     }
 
@@ -50,19 +51,18 @@ public class Purchase {
     }
 
     public int getCost() {
-        return  price * number;
+        return price.multiplication(number);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-       Purchase purchase = (Purchase) o;
-        return price == purchase.price && name.equals(purchase.name);
+        Purchase purchase = (Purchase) o;
+        return name.equals(purchase.name) && price.equals(purchase.price);
     }
 
     @Override
     public String toString() {
-        return name + ";" + toByn(price) + ";" + number + ";" + toByn(getCost()) ;
+        return name + ";" + price + ";" + number + ";" + toByn(getCost());
     }
 }
-
