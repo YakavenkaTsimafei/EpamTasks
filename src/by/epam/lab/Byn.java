@@ -1,7 +1,5 @@
 package by.epam.lab;
 
-import static by.epam.lab.Utils.toByn;
-
 public class Byn implements Comparable<Byn> {
     private int costInKopecks;
 
@@ -15,6 +13,7 @@ public class Byn implements Comparable<Byn> {
     public int multiplication(int c) {
         return costInKopecks * c;
     }
+
     public int difference(int c) {
         return costInKopecks - c;
     }
@@ -31,6 +30,9 @@ public class Byn implements Comparable<Byn> {
         return costInKopecks == byn.costInKopecks;
     }
 
+    public static String toByn(int coins) {
+        return String.format("%d.%02d", coins / 100, coins % 100);
+    }
 
     @Override
     public String toString() {

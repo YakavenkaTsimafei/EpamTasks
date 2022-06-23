@@ -1,5 +1,7 @@
 package by.epam.lab;
+
 import java.util.Scanner;
+
 public class PurchasesFactory {
 
     private static enum PurchaseKind {

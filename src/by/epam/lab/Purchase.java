@@ -2,7 +2,7 @@ package by.epam.lab;
 
 import java.util.Scanner;
 
-import static by.epam.lab.Utils.toByn;
+import static by.epam.lab.Byn.toByn;
 
 
 public class Purchase {

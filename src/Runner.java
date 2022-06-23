@@ -27,7 +27,6 @@ public class Runner {
                     purchaseNumberWithMaxCost = i;
                 }
                 i++;
-
             }
 
             System.out.println("Purchase with maximum Cost : " + purchases[purchaseNumberWithMaxCost]);
