@@ -1,5 +1,4 @@
 package by.epam.lab;
-
 import java.util.Scanner;
 
 public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
@@ -21,11 +20,11 @@ public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
     }
 
     @Override
-    public int getCost() {
+    public Byn getCost() {
         if (getNumber() >= DISCOUNT_QUANTITY) {
-            return (int) (getPrice().multiplication(getNumber()) * (100 - discount) / 100);
+            return getPrice().multiplicationWithADiscount(getNumber(), discount);
         } else {
-            return (int) getPrice().multiplication(getNumber());
+            return getPrice().multiplication(getNumber());
         }
     }
 

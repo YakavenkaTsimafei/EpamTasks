@@ -10,17 +10,34 @@ public class Byn implements Comparable<Byn> {
         this.costInKopecks = costInKopecks;
     }
 
-    public int multiplication(int c) {
-        return costInKopecks * c;
+    public Byn(Byn byn) {
+        this.costInKopecks = byn.costInKopecks;
     }
 
-    public int difference(int c) {
-        return costInKopecks - c;
+    public Byn copy(Byn byn) {
+        return new Byn(byn);
+    }
+
+    public Byn multiplicationWithADiscount(int number, double discount) {
+        costInKopecks = (int) (costInKopecks * number * (100 - discount) / 100);
+        return this;
+    }
+
+    public Byn multiplication(int number) {
+        costInKopecks = costInKopecks * number;
+        return this;
+    }
+
+    public Byn difference(Byn discount, int number) {
+        costInKopecks = (costInKopecks - discount.costInKopecks) * number;
+        return this;
     }
 
     @Override
-    public int compareTo(Byn byn) {
-        return byn.costInKopecks - this.costInKopecks;
+    public int compareTo(Byn o) {
+        if (o.costInKopecks > this.costInKopecks) return 1;
+        if (o.costInKopecks == this.costInKopecks) return 0;
+        else return -1;
     }
 
     @Override
@@ -30,14 +47,8 @@ public class Byn implements Comparable<Byn> {
         return costInKopecks == byn.costInKopecks;
     }
 
-    public static String toByn(int coins) {
-        return String.format("%d.%02d", coins / 100, coins % 100);
-    }
-
     @Override
     public String toString() {
-        return toByn(costInKopecks);
+        return String.format("%d.%02d", costInKopecks / 100, costInKopecks % 100);
     }
-
-
 }

@@ -2,8 +2,6 @@ package by.epam.lab;
 
 import java.util.Scanner;
 
-import static by.epam.lab.Byn.toByn;
-
 
 public class Purchase {
     private String name;
@@ -35,7 +33,7 @@ public class Purchase {
     }
 
     public Byn getPrice() {
-        return price;
+        return price.copy(price);
     }
 
     public void setPrice(Byn price) {
@@ -50,7 +48,7 @@ public class Purchase {
         this.number = number;
     }
 
-    public int getCost() {
+    public Byn getCost() {
         return price.multiplication(number);
     }
 
@@ -58,11 +56,11 @@ public class Purchase {
     public boolean equals(Object o) {
         if (this == o) return true;
         Purchase purchase = (Purchase) o;
-        return name.equals(purchase.name) && price.equals(purchase.price);
+        return name.equals(purchase.name) && price.copy(price).equals(purchase.price.copy(price));
     }
 
     @Override
     public String toString() {
-        return name + ";" + price + ";" + number + ";" + toByn(getCost());
+        return name + ";" + price.copy(price) + ";" + number + ";" + getCost().toString();
     }
 }
