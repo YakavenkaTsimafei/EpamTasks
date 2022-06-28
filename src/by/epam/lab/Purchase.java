@@ -49,18 +49,20 @@ public class Purchase {
     }
 
     public Byn getCost() {
-        return price.multiplication(number);
+        return price.copy(price).mltp(number);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         Purchase purchase = (Purchase) o;
-        return name.equals(purchase.name) && price.copy(price).equals(purchase.price.copy(price));
+        if (o instanceof Purchase) {
+            return name.equals(purchase.name) && price.equals(purchase.price);
+        } else return false;
     }
 
     @Override
     public String toString() {
-        return name + ";" + price.copy(price) + ";" + number + ";" + getCost().toString();
+        return name + ";" + price + ";" + number + ";" + getCost();
     }
 }

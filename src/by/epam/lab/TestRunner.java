@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
@@ -20,15 +19,29 @@ public class TestRunner {
 
     @Test
     public void testCompareTo() {
-        Byn[] byn = {new Byn(123),
-                new Byn(145),
-                new Byn(0),
-                new Byn(1),
-        };
-        Arrays.sort(byn);
-        for (Byn b : byn) {
-            System.out.println(b);
-        }
+        Byn byn = new Byn(123);
+        Byn byn1 = new Byn(122);
+        assertEquals(-1, byn.compareTo(byn1));
+    }
+
+    @Test
+    public void testMltp() {
+        Byn byn = new Byn(100);
+        assertEquals("10.00", byn.mltp(10).toString());
+    }
+
+    @Test
+    public void testDifference() {
+        Byn byn = new Byn(100);
+        Byn byn1 = new Byn(50);
+        assertEquals("5.00", byn.difference(byn1, 10).toString());
+    }
+
+    @Test
+    public void testDiscount() {
+        Byn byn = new Byn(100);
+        Byn byn1 = new Byn(20);
+        assertEquals("8.00", byn.difference(byn1, 10).toString());
     }
 
     @Test

@@ -18,12 +18,12 @@ public class Byn implements Comparable<Byn> {
         return new Byn(byn);
     }
 
-    public Byn multiplicationWithADiscount(int number, double discount) {
+    public Byn mltpDiscount(int number, double discount) {
         costInKopecks = (int) (costInKopecks * number * (100 - discount) / 100);
         return this;
     }
 
-    public Byn multiplication(int number) {
+    public Byn mltp(int number) {
         costInKopecks = costInKopecks * number;
         return this;
     }
@@ -35,14 +35,13 @@ public class Byn implements Comparable<Byn> {
 
     @Override
     public int compareTo(Byn o) {
-        if (o.costInKopecks > this.costInKopecks) return 1;
-        if (o.costInKopecks == this.costInKopecks) return 0;
-        else return -1;
+        return o.costInKopecks - this.costInKopecks;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Byn byn = (Byn) o;
         return costInKopecks == byn.costInKopecks;
     }

@@ -1,4 +1,5 @@
 package by.epam.lab;
+
 import java.util.Scanner;
 
 public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
@@ -22,14 +23,14 @@ public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
     @Override
     public Byn getCost() {
         if (getNumber() >= DISCOUNT_QUANTITY) {
-            return getPrice().multiplicationWithADiscount(getNumber(), discount);
+            return getPrice().copy(getPrice()).mltpDiscount(getNumber(), discount);
         } else {
-            return getPrice().multiplication(getNumber());
+            return getPrice().copy(getPrice()).mltp(getNumber());
         }
     }
 
     @Override
     public String toString() {
-        return discount + ";" + super.toString();
+        return super.getName() + ";" + super.getPrice() + ";" + super.getNumber() + ";" + discount + ";" + getCost();
     }
 }

@@ -25,11 +25,11 @@ public class PurchaseWithADiscount extends Purchase {
 
     @Override
     public Byn getCost() {
-        return getPrice().difference(discount, getNumber());
+        return getPrice().copy(getPrice()).difference(discount, getNumber());
     }
 
     @Override
     public String toString() {
-        return discount + ";" + super.toString();
+        return super.getName() + ";" + super.getPrice() + ";" + super.getNumber() + ";" + discount + ";" + getCost();
     }
 }

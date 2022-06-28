@@ -11,17 +11,16 @@ public class Runner {
             Purchase[] purchases = new Purchase[6];
             int i = 0;
             Purchase purchaseWithMaxCost = new Purchase();
-
-
             while (sc.hasNext()) {
                 purchases[i] = PurchasesFactory.getPurchaseFromFactory(sc);
-                if (i > 0 && purchases[i].getPrice().compareTo(purchases[i - 1].getPrice()) == 1) {
+                if (i > 0 && purchases[i].getPrice().compareTo(purchases[i - 1].getPrice()) > 0) {
                     purchaseWithMaxCost = purchases[i - 1];
                 }
                 System.out.println(purchases[i]);
-                if (i > 0) {
-                    System.out.println(purchases[i].equals(purchases[i - 1]));
-                }
+                if (i == purchases.length && purchases[0].equals(purchases[i - 1])) {
+                    System.out.println("All purchases are equal");
+                } else System.out.println("All purchases aren't equal");
+
                 i++;
             }
             System.out.println("Purchase with maximum Cost : " + purchaseWithMaxCost);
