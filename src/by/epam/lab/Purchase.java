@@ -33,7 +33,7 @@ public class Purchase {
     }
 
     public Byn getPrice() {
-        return price.copy(price);
+        return price;
     }
 
     public void setPrice(Byn price) {
@@ -47,7 +47,6 @@ public class Purchase {
     public void setNumber(int number) {
         this.number = number;
     }
-
     public Byn getCost() {
         return price.copy(price).mltp(number);
     }
