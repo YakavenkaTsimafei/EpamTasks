@@ -20,6 +20,18 @@ public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
         this.discount = discount;
     }
 
+    public double getDiscount() {
+        return discount;
+    }
+
+    public static int getDiscountQuantity() {
+        return DISCOUNT_QUANTITY;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
+
     @Override
     public Byn getCost() {
         if (getNumber() >= DISCOUNT_QUANTITY) {
@@ -31,6 +43,6 @@ public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
 
     @Override
     public String toString() {
-        return super.getName() + ";" + super.getPrice() + ";" + super.getNumber() + ";" + discount + ";" + getCost();
+        return getName() + ";" + getPrice() + ";" + getNumber() + ";" + discount + ";" + getCost();
     }
 }

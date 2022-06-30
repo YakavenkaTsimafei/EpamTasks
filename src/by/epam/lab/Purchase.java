@@ -47,6 +47,7 @@ public class Purchase {
     public void setNumber(int number) {
         this.number = number;
     }
+
     public Byn getCost() {
         return price.copy(price).mltp(number);
     }
@@ -54,8 +55,8 @@ public class Purchase {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        Purchase purchase = (Purchase) o;
         if (o instanceof Purchase) {
+            Purchase purchase = (Purchase) o;
             return name.equals(purchase.name) && price.equals(purchase.price);
         } else return false;
     }

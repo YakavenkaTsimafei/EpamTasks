@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) {
-        try (Scanner sc = new Scanner(new FileReader("src\\in1.txt"))) {
+        try (Scanner sc = new Scanner(new FileReader("src\\in.txt"))) {
             Purchase[] purchases = new Purchase[6];
             int i = 0;
             int c = 0;

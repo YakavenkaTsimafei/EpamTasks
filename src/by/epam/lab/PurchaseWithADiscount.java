@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class PurchaseWithADiscount extends Purchase {
     private Byn discount;
 
-    public PurchaseWithADiscount() {
+    public PurchaseWithADiscount(Purchase purchase, Byn byn1) {
 
     }
 
@@ -14,12 +14,16 @@ public class PurchaseWithADiscount extends Purchase {
         this.discount = new Byn(sc.nextInt());
     }
 
+    public PurchaseWithADiscount(String name, Byn price, int number, Byn discount) {
+        super(name, price, number);
+        this.discount = discount;
+    }
+
     public Byn getDiscount() {
         return discount;
     }
 
-    public PurchaseWithADiscount(String name, Byn price, int number, Byn discount) {
-        super(name, price, number);
+    public void setDiscount(Byn discount) {
         this.discount = discount;
     }
 
@@ -30,6 +34,6 @@ public class PurchaseWithADiscount extends Purchase {
 
     @Override
     public String toString() {
-        return super.getName() + ";" + super.getPrice() + ";" + super.getNumber() + ";" + discount + ";" + getCost();
+        return getName() + ";" + getPrice() + ";" + getNumber() + ";" + discount + ";" + getCost();
     }
 }
