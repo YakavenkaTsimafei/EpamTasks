@@ -74,7 +74,7 @@ public class TestRunner {
     public void testToStringPurchase() {
         Byn byn = new Byn(123);
         Purchase purchase = new Purchase("milk", byn, 10);
-        assertEquals("milk;1.23;10;12.30", purchase.toString());
+        assertEquals("Purchase;milk;1.23;10;12.30", purchase.toString());
     }
 
     @Test
@@ -132,7 +132,7 @@ public class TestRunner {
                 purchases[i] = PurchasesFactory.getPurchaseFromFactory(sc);
                 i++;
             }
-            assertEquals("milk;1.00;10;10.00", purchases[0].toString());
+            assertEquals("Purchase;milk;1.00;10;10.00", purchases[0].toString());
             assertEquals("PurchaseWithADiscountDependingOnTheQuantity;bread;5.00;4;12.4;20.00", purchases[2].toString());
             assertEquals("PurchaseWithADiscount;cheese;2.00;3;0.50;4.50", purchases[4].toString());
 
