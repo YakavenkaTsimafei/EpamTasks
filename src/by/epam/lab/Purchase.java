@@ -63,6 +63,6 @@ public class Purchase {
 
     @Override
     public String toString() {
-        return name + ";" + price + ";" + number + ";" + getCost();
+        return getClass().getSimpleName() + ";" + name + ";" + price + ";" + number + ";" + getCost();
     }
 }
