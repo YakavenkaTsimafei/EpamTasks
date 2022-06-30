@@ -43,6 +43,6 @@ public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
 
     @Override
     public String toString() {
-        return getName() + ";" + getPrice() + ";" + getNumber() + ";" + discount + ";" + getCost();
+        return getClass().getSimpleName() + ";" + getName() + ";" + getPrice() + ";" + getNumber() + ";" + discount + ";" + getCost();
     }
 }
