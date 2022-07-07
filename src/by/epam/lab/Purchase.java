@@ -49,7 +49,7 @@ public class Purchase {
     }
 
     public Byn getCost() {
-        return price.copy(price).mltp(number);
+        return price.copy(price).mul(number);
     }
 
     @Override
@@ -61,8 +61,12 @@ public class Purchase {
         } else return false;
     }
 
+    protected String fieldsToString() {
+        return getClass().getSimpleName() + ";" + name + ";" + price + ";" + number;
+    }
+
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ";" + name + ";" + price + ";" + number + ";" + getCost();
+        return fieldsToString() + ";" + getCost();
     }
 }

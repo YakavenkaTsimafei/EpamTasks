@@ -2,20 +2,20 @@ package by.epam.lab;
 
 import java.util.Scanner;
 
-public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
+public class PercentDiscountPurchase extends Purchase {
     private double discount;
     private static final int DISCOUNT_QUANTITY = 5;
 
-    public PurchaseWithADiscountDependingOnTheQuantity() {
+    public PercentDiscountPurchase() {
 
     }
 
-    public PurchaseWithADiscountDependingOnTheQuantity(Scanner sc) {
+    public PercentDiscountPurchase(Scanner sc) {
         super(sc);
         this.discount = sc.nextDouble();
     }
 
-    public PurchaseWithADiscountDependingOnTheQuantity(String name, Byn price, int number, double discount) {
+    public PercentDiscountPurchase(String name, Byn price, int number, double discount) {
         super(name, price, number);
         this.discount = discount;
     }
@@ -34,15 +34,16 @@ public class PurchaseWithADiscountDependingOnTheQuantity extends Purchase {
 
     @Override
     public Byn getCost() {
+        Byn x;
         if (getNumber() >= DISCOUNT_QUANTITY) {
-            return getPrice().copy(getPrice()).mltpDiscount(getNumber(), discount);
+            x = getPrice().copy(getPrice()).mul((100-discount)/100, Byn.RoundMethod.CEIL,1).mul(getNumber());
         } else {
-            return getPrice().copy(getPrice()).mltp(getNumber());
+            x = getPrice().copy(getPrice()).mul(getNumber());
         }
+        return x;
     }
 
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + ";" + getName() + ";" + getPrice() + ";" + getNumber() + ";" + discount + ";" + getCost();
+    protected String fieldsToString() {
+        return super.fieldsToString() + ";" + discount;
     }
 }

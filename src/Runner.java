@@ -10,11 +10,11 @@ public class Runner {
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(new FileReader("src\\in.txt"))) {
             sc.useLocale(Locale.ENGLISH);
-            Purchase[] purchases = new Purchase[6];
-            int i = 0;
-            int c = 0;
+            final int PURCHASES_NUMBER = 6;
+            Purchase[] purchases = new Purchase[PURCHASES_NUMBER];
+            boolean areEqual=true;
             Purchase purchaseWithMaxCost = new Purchase();
-            while (sc.hasNext()) {
+            for(int i = 0; i < purchases.length; i++) {
                 purchases[i] = PurchasesFactory.getPurchaseFromFactory(sc);
                 if (i == 0) {
                     purchaseWithMaxCost = purchases[0];
@@ -23,18 +23,16 @@ public class Runner {
                     purchaseWithMaxCost = purchases[i];
                 }
                 System.out.println(purchases[i]);
-                if (purchases[0].equals(purchases[i])) {
-                    c++;
+                if (areEqual) {
+                    areEqual=purchases[i].equals(purchases[0]);
                 }
-
-                i++;
             }
-            if (c == purchases.length) {
+            if (areEqual ==true) {
                 System.out.println("All purchases are equal");
             } else {
                 System.out.println("All purchases aren't equal");
             }
-            System.out.println("Purchase with maximum Cost : " + purchaseWithMaxCost);
+            System.out.println("Purchase with maximum Cost : " + purchaseWithMaxCost.toString());
 
         } catch (FileNotFoundException e) {
             System.err.println("Input file is not found");

@@ -4,22 +4,29 @@ import java.util.Scanner;
 
 public class PurchasesFactory {
 
-    private static enum PurchaseKind {
-        GENERAL_PURCHASE, PURCHASE_WITH_A_DISCOUNT, PURCHASE_WITH_A_DISCOUNT_DEPENDING_ON_THE_QUANTITY;
+    private enum PurchaseKind {
+        GENERAL_PURCHASE {
+            Purchase getPurchase(Scanner sc) {
+                return new Purchase(sc);
+            }
+        },
+
+        PRICE_DISCOUNT_PURCHASE {
+            Purchase getPurchase(Scanner sc) {
+                return new PriceDiscountPurchase(sc);
+            }
+        },
+        PERCENT_DISCOUNT_PURCHASE {
+            Purchase getPurchase(Scanner sc) {
+                return new PercentDiscountPurchase(sc);
+            }
+        };
+
+        abstract Purchase getPurchase(Scanner sc);
     }
 
     public static Purchase getPurchaseFromFactory(Scanner sc) {
         String id = sc.next();
-        PurchaseKind kind = PurchaseKind.valueOf(id);
-        switch (kind) {
-            case GENERAL_PURCHASE:
-                return new Purchase(sc);
-            case PURCHASE_WITH_A_DISCOUNT:
-                return new PurchaseWithADiscount(sc);
-            case PURCHASE_WITH_A_DISCOUNT_DEPENDING_ON_THE_QUANTITY:
-                return new PurchaseWithADiscountDependingOnTheQuantity(sc);
-            default:
-                throw new IllegalArgumentException();
-        }
+        return PurchaseKind.valueOf(id).getPurchase(sc);
     }
 }
