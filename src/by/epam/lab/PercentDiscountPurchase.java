@@ -36,13 +36,14 @@ public class PercentDiscountPurchase extends Purchase {
     public Byn getCost() {
         Byn x;
         if (getNumber() >= DISCOUNT_QUANTITY) {
-            x = getPrice().copy(getPrice()).mul((100-discount)/100, Byn.RoundMethod.CEIL,1).mul(getNumber());
+            x = getPrice().copy(getPrice()).mul((100 - discount) / 100, Method.RoundMethod.CEIL, 1).mul(getNumber());
         } else {
             x = getPrice().copy(getPrice()).mul(getNumber());
         }
         return x;
     }
 
+    @Override
     protected String fieldsToString() {
         return super.fieldsToString() + ";" + discount;
     }

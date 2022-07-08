@@ -32,6 +32,7 @@ public class PriceDiscountPurchase extends Purchase {
         return getPrice().copy(getPrice()).sub(discount).mul(getNumber());
     }
 
+    @Override
     protected String fieldsToString() {
         return super.fieldsToString() + ";" + discount;
     }

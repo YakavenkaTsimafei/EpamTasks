@@ -8,11 +8,11 @@ public class Byn implements Comparable<Byn> {
     }
 
     public Byn(int rubs, int coins) {
-        this.value = rubs * 100 + coins;
+        this(rubs * 100 + coins);
     }
 
     public Byn(Byn byn) {
-        this.value = byn.value;
+        this(byn.value);
     }
 
     public int getRubs() {
@@ -27,28 +27,28 @@ public class Byn implements Comparable<Byn> {
         return new Byn(byn);
     }
 
-    public Byn mul(double k, RoundMethod roundMethod, int d) {
+    public Byn mul(double k, Method.RoundMethod roundMethod, int d) {
         value = roundMethod.round(value * k, d);
         return this;
     }
 
-    public Byn round(RoundMethod roundMethod, int d) {
+    public Byn round(Method.RoundMethod roundMethod, int d) {
         value = roundMethod.round(value, d);
         return this;
     }
 
     public Byn add(Byn byn) {
-        value = value + byn.value;
+        value += byn.value;
         return this;
     }
 
     public Byn mul(int number) {
-        value = value * number;
+        value *= number;
         return this;
     }
 
     public Byn sub(Byn discount) {
-        value = value - discount.value;
+        value -= discount.value;
         return this;
     }
 
@@ -70,29 +70,6 @@ public class Byn implements Comparable<Byn> {
         return String.format("%d.%02d", value / 100, value % 100);
     }
 
-    public enum RoundMethod {
-        FLOOR {
-            double roundFunction(double d) {
-                return Math.floor(d);
-            }
-        },
-        ROUND {
-            double roundFunction(double d) {
-                return Math.round(d);
-            }
-        },
-        CEIL {
-            double roundFunction(double d) {
-                return Math.ceil(d);
-            }
-        };
 
-        abstract double roundFunction(double value);
-
-        private int round(double roundedValue, int d) {
-            int[] tenPow = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
-            return (int) roundFunction(roundedValue / tenPow[d]) * tenPow[d];
-        }
-    }
 }
 

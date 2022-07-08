@@ -171,6 +171,28 @@ public class TestRunner {
     public void testMulDouble() {
         Byn byn = new Byn(1000);
         double x = 16.6;
-        assertEquals("8.40", byn.mul((100 - x) / 100, Byn.RoundMethod.CEIL, 1).toString());
+        assertEquals("8.40", byn.mul((100 - x) / 100, Method.RoundMethod.CEIL, 1).toString());
     }
+
+    @Test
+    public void testRound() {
+        Byn byn = new Byn(775);
+        assertEquals("7.80", byn.round(Method.RoundMethod.CEIL, 1).toString());
+    }
+
+
+    @Test
+    public void testGetRubs() {
+        Byn byn = new Byn(1234);
+        assertEquals(12, byn.getRubs());
+
+    }
+
+    @Test
+    public void testGetCoins() {
+        Byn byn = new Byn(1234);
+        assertEquals(34, byn.getCoins());
+
+    }
+
 }

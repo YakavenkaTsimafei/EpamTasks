@@ -12,9 +12,9 @@ public class Runner {
             sc.useLocale(Locale.ENGLISH);
             final int PURCHASES_NUMBER = 6;
             Purchase[] purchases = new Purchase[PURCHASES_NUMBER];
-            boolean areEqual=true;
+            boolean areEqual = true;
             Purchase purchaseWithMaxCost = new Purchase();
-            for(int i = 0; i < purchases.length; i++) {
+            for (int i = 0; i < purchases.length; i++) {
                 purchases[i] = PurchasesFactory.getPurchaseFromFactory(sc);
                 if (i == 0) {
                     purchaseWithMaxCost = purchases[0];
@@ -24,10 +24,10 @@ public class Runner {
                 }
                 System.out.println(purchases[i]);
                 if (areEqual) {
-                    areEqual=purchases[i].equals(purchases[0]);
+                    areEqual = purchases[i].equals(purchases[0]);
                 }
             }
-            if (areEqual ==true) {
+            if (areEqual == true) {
                 System.out.println("All purchases are equal");
             } else {
                 System.out.println("All purchases aren't equal");
