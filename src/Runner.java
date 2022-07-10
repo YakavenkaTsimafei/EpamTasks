@@ -16,10 +16,7 @@ public class Runner {
             Purchase purchaseWithMaxCost = new Purchase();
             for (int i = 0; i < purchases.length; i++) {
                 purchases[i] = PurchasesFactory.getPurchaseFromFactory(sc);
-                if (i == 0) {
-                    purchaseWithMaxCost = purchases[0];
-                }
-                if (i > 0 && purchases[i].getCost().compareTo(purchaseWithMaxCost.getCost()) < 0) {
+                if ( purchases[i].getCost().compareTo(purchaseWithMaxCost.getCost()) > 0) {
                     purchaseWithMaxCost = purchases[i];
                 }
                 System.out.println(purchases[i]);
@@ -27,12 +24,12 @@ public class Runner {
                     areEqual = purchases[i].equals(purchases[0]);
                 }
             }
-            if (areEqual == true) {
+            if (areEqual) {
                 System.out.println("All purchases are equal");
             } else {
                 System.out.println("All purchases aren't equal");
             }
-            System.out.println("Purchase with maximum Cost : " + purchaseWithMaxCost.toString());
+            System.out.println("Purchase with maximum Cost : " + purchaseWithMaxCost);
 
         } catch (FileNotFoundException e) {
             System.err.println("Input file is not found");

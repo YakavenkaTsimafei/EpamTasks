@@ -34,7 +34,7 @@ public class TestRunner {
     }
 
     @Test
-    public void testEqualsPurchaseWithADiscount() {
+    public void testEqualsPriceDiscountPurchase() {
         Byn byn = new Byn(123);
         Byn byn1 = new Byn(123);
         Purchase purchase = new Purchase("milk", byn, 10);
@@ -45,7 +45,7 @@ public class TestRunner {
     }
 
     @Test
-    public void testEqualsPurchaseWithADiscountDependingOnTheQuantity() {
+    public void testEqualsPercentDiscountPurchase() {
         Byn byn = new Byn(123);
         Purchase purchase = new Purchase("milk", byn, 10);
         PercentDiscountPurchase percentDiscountPurchase = new PercentDiscountPurchase("milk", byn, 10, 15.5);
@@ -56,18 +56,26 @@ public class TestRunner {
     }
 
     @Test
-    public void testToStringPurchaseWithADiscount() {
+    public void testToStringPriceDiscountPurchase() {
         Byn byn = new Byn(123);
         Byn byn1 = new Byn(100);
+        Byn byn2 =new Byn();
         PriceDiscountPurchase priceDiscountPurchase = new PriceDiscountPurchase("milk", byn, 10, byn1);
+        PriceDiscountPurchase priceDiscountPurchase1 = new PriceDiscountPurchase("milk", byn, 10, byn2);
+        PriceDiscountPurchase priceDiscountPurchase3 = new PriceDiscountPurchase();
         assertEquals("PriceDiscountPurchase;milk;1.23;10;1.00;2.30", priceDiscountPurchase.toString());
+        assertEquals("PriceDiscountPurchase;milk;1.23;10;0.00;12.30", priceDiscountPurchase1.toString());
+        assertEquals("PriceDiscountPurchase;;0.00;0;0.00;0.00",priceDiscountPurchase3.toString());
     }
 
     @Test
-    public void testToStringPurchaseWithADiscountDependingOnTheQuantity() {
+    public void testToStringPercentDiscountPurchase() {
         Byn byn = new Byn(123);
         PercentDiscountPurchase percentDiscountPurchase = new PercentDiscountPurchase("milk", byn, 10, 15.5);
-        assertEquals("PercentDiscountPurchase;milk;1.23;10;15.5;11.00", percentDiscountPurchase.toString());
+        PercentDiscountPurchase percentDiscountPurchase1 = new PercentDiscountPurchase();
+        assertEquals("PercentDiscountPurchase;milk;1.23;10;15.5;10.40", percentDiscountPurchase.toString());
+        assertEquals("PercentDiscountPurchase;;0.00;0;0.0;0.00",percentDiscountPurchase1.toString());
+
     }
 
     @Test
@@ -81,8 +89,14 @@ public class TestRunner {
     public void testToStringByn() {
         Byn byn = new Byn(123);
         Byn byn1 = new Byn(1, 23);
+        Byn byn2 = new Byn();
+        Byn byn3 = new Byn(1234567);
+        Byn byn4= new Byn(123, 45);
         assertEquals("1.23", byn.toString());
         assertEquals("1.23", byn1.toString());
+        assertEquals("0.00", byn2.toString());
+        assertEquals("12345.67", byn3.toString());
+        assertEquals("123.45", byn4.toString());
     }
 
     @Test
@@ -90,7 +104,7 @@ public class TestRunner {
         Byn byn = new Byn(123);
         Byn byn1 = new Byn(122);
         Byn byn2 = new Byn(100);
-        assertEquals(-1, byn.compareTo(byn1));
+        assertEquals(1, byn.compareTo(byn1));
         assertNotEquals(12, byn2.compareTo(byn));
         assertNotEquals(12, byn2.compareTo(byn1));
 
@@ -118,7 +132,7 @@ public class TestRunner {
     @Test
     public void testGetCostPercentDiscountPurchase() {
         Byn byn = new Byn(123);
-        Byn byn1 = new Byn(1100);
+        Byn byn1 = new Byn(1040);
         Byn byn2 = new Byn(369);
         PercentDiscountPurchase percentDiscountPurchase = new PercentDiscountPurchase("milk", byn, 10, 15.5);
         PercentDiscountPurchase percentDiscountPurchase1 = new PercentDiscountPurchase("milk", byn, 3, 15.5);
@@ -171,15 +185,38 @@ public class TestRunner {
     public void testMulDouble() {
         Byn byn = new Byn(1000);
         double x = 16.6;
-        assertEquals("8.40", byn.mul((100 - x) / 100, Method.RoundMethod.CEIL, 1).toString());
+        assertEquals("8.40", byn.mul((100 - x) / 100, Byn.RoundMethod.CEIL, 1).toString());
+    }
+
+    @Test
+    public void testCeil() {
+        Byn byn = new Byn(775);
+        Byn byn1 = new Byn(771);
+        Byn byn2 = new Byn(770);
+        assertEquals("7.80", byn.round(Byn.RoundMethod.CEIL, 1).toString());
+        assertEquals("7.80", byn1.round(Byn.RoundMethod.CEIL, 1).toString());
+        assertEquals("7.70", byn2.round(Byn.RoundMethod.CEIL, 1).toString());
     }
 
     @Test
     public void testRound() {
         Byn byn = new Byn(775);
-        assertEquals("7.80", byn.round(Method.RoundMethod.CEIL, 1).toString());
+        Byn byn1 = new Byn(774);
+        Byn byn2 = new Byn(770);
+        assertEquals("7.80", byn.round(Byn.RoundMethod.ROUND, 1).toString());
+        assertEquals("7.70", byn1.round(Byn.RoundMethod.ROUND, 1).toString());
+        assertEquals("7.70", byn2.round(Byn.RoundMethod.ROUND, 1).toString());
     }
 
+    @Test
+    public void testFLOOR() {
+        Byn byn = new Byn(778);
+        Byn byn1 = new Byn(771);
+        Byn byn2 = new Byn(780);
+        assertEquals("7.70", byn.round(Byn.RoundMethod.FLOOR, 1).toString());
+        assertEquals("7.70", byn1.round(Byn.RoundMethod.FLOOR, 1).toString());
+        assertEquals("7.80", byn2.round(Byn.RoundMethod.FLOOR, 1).toString());
+    }
 
     @Test
     public void testGetRubs() {

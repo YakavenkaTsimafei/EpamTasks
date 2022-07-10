@@ -9,7 +9,7 @@ public class Purchase {
     private int number;
 
     public Purchase() {
-
+        this("", new Byn(0), 0);
     }
 
     public Purchase(Scanner sc) {
@@ -49,7 +49,7 @@ public class Purchase {
     }
 
     public Byn getCost() {
-        return price.copy(price).mul(number);
+        return new Byn(price).mul(number);
     }
 
     @Override

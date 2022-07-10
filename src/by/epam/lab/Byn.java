@@ -1,7 +1,17 @@
 package by.epam.lab;
 
+import java.util.Scanner;
+
 public class Byn implements Comparable<Byn> {
     private int value;
+
+    public Byn() {
+        this(0);
+    }
+
+    public Byn(Scanner sc) {
+        this.value = sc.nextInt();
+    }
 
     public Byn(int value) {
         this.value = value;
@@ -23,16 +33,12 @@ public class Byn implements Comparable<Byn> {
         return this.value % 100;
     }
 
-    public Byn copy(Byn byn) {
-        return new Byn(byn);
-    }
-
-    public Byn mul(double k, Method.RoundMethod roundMethod, int d) {
+    public Byn mul(double k, RoundMethod roundMethod, int d) {
         value = roundMethod.round(value * k, d);
         return this;
     }
 
-    public Byn round(Method.RoundMethod roundMethod, int d) {
+    public Byn round(RoundMethod roundMethod, int d) {
         value = roundMethod.round(value, d);
         return this;
     }
@@ -54,7 +60,7 @@ public class Byn implements Comparable<Byn> {
 
     @Override
     public int compareTo(Byn o) {
-        return o.value - this.value;
+        return this.value - o.value;
     }
 
     @Override
@@ -67,9 +73,34 @@ public class Byn implements Comparable<Byn> {
 
     @Override
     public String toString() {
-        return String.format("%d.%02d", value / 100, value % 100);
+        return String.format("%d.%02d", getRubs(), getCoins());
+
     }
 
+    public enum RoundMethod {
+        FLOOR {
+            double roundFunction(double d) {
+                return Math.floor(d);
+            }
+        },
+        ROUND {
+            double roundFunction(double d) {
+                return Math.round(d);
+            }
+        },
+        CEIL {
+            double roundFunction(double d) {
+                return Math.ceil(d);
+            }
+        };
+
+        abstract double roundFunction(double value);
+
+        public int round(double roundedValue, int d) {
+            int[] tenPow = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000};
+            return (int) roundFunction(roundedValue / tenPow[d]) * tenPow[d];
+        }
+    }
 
 }
 

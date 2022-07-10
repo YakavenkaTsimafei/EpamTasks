@@ -7,7 +7,7 @@ public class PercentDiscountPurchase extends Purchase {
     private static final int DISCOUNT_QUANTITY = 5;
 
     public PercentDiscountPurchase() {
-
+        this("", new Byn(0), 0,0.00);
     }
 
     public PercentDiscountPurchase(Scanner sc) {
@@ -24,21 +24,15 @@ public class PercentDiscountPurchase extends Purchase {
         return discount;
     }
 
-    public static int getDiscountQuantity() {
-        return DISCOUNT_QUANTITY;
-    }
-
     public void setDiscount(double discount) {
         this.discount = discount;
     }
 
     @Override
     public Byn getCost() {
-        Byn x;
+        Byn x = super.getCost();
         if (getNumber() >= DISCOUNT_QUANTITY) {
-            x = getPrice().copy(getPrice()).mul((100 - discount) / 100, Method.RoundMethod.CEIL, 1).mul(getNumber());
-        } else {
-            x = getPrice().copy(getPrice()).mul(getNumber());
+            x.mul((100 - discount) / 100, Byn.RoundMethod.CEIL, 1);
         }
         return x;
     }

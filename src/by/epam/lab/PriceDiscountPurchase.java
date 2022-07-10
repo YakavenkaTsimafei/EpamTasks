@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class PriceDiscountPurchase extends Purchase {
     private Byn discount;
 
-    public PriceDiscountPurchase(Purchase purchase, Byn byn1) {
-
+    public PriceDiscountPurchase() {
+        this("", new Byn(0), 0,new Byn(0));
     }
 
     public PriceDiscountPurchase(Scanner sc) {
@@ -29,7 +29,7 @@ public class PriceDiscountPurchase extends Purchase {
 
     @Override
     public Byn getCost() {
-        return getPrice().copy(getPrice()).sub(discount).mul(getNumber());
+        return new Byn(getPrice()).sub(discount).mul(getNumber());
     }
 
     @Override
