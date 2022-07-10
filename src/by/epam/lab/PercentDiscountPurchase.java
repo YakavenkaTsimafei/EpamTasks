@@ -7,7 +7,7 @@ public class PercentDiscountPurchase extends Purchase {
     private static final int DISCOUNT_QUANTITY = 5;
 
     public PercentDiscountPurchase() {
-        this("", new Byn(0), 0,0.00);
+        this("", new Byn(0), 0, 0.00);
     }
 
     public PercentDiscountPurchase(Scanner sc) {
