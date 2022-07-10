@@ -73,7 +73,7 @@ public class TestRunner {
         Byn byn = new Byn(123);
         PercentDiscountPurchase percentDiscountPurchase = new PercentDiscountPurchase("milk", byn, 10, 15.5);
         PercentDiscountPurchase percentDiscountPurchase1 = new PercentDiscountPurchase();
-        assertEquals("PercentDiscountPurchase;milk;1.23;10;15.5;10.40", percentDiscountPurchase.toString());
+        assertEquals("PercentDiscountPurchase;milk;1.23;10;15.5;10.39", percentDiscountPurchase.toString());
         assertEquals("PercentDiscountPurchase;;0.00;0;0.0;0.00", percentDiscountPurchase1.toString());
 
     }
@@ -132,7 +132,7 @@ public class TestRunner {
     @Test
     public void testGetCostPercentDiscountPurchase() {
         Byn byn = new Byn(123);
-        Byn byn1 = new Byn(1040);
+        Byn byn1 = new Byn(1039);
         Byn byn2 = new Byn(369);
         PercentDiscountPurchase percentDiscountPurchase = new PercentDiscountPurchase("milk", byn, 10, 15.5);
         PercentDiscountPurchase percentDiscountPurchase1 = new PercentDiscountPurchase("milk", byn, 3, 15.5);

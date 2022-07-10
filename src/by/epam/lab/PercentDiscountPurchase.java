@@ -31,8 +31,8 @@ public class PercentDiscountPurchase extends Purchase {
     @Override
     public Byn getCost() {
         Byn x = super.getCost();
-        if (getNumber() >= DISCOUNT_QUANTITY) {
-            x.mul((100 - discount) / 100, RoundMethod.CEIL, 1);
+        if (getNumber() > DISCOUNT_QUANTITY) {
+            x.mul((100 - discount) / 100, RoundMethod.ROUND, 0);
         }
         return x;
     }
