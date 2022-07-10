@@ -59,13 +59,13 @@ public class TestRunner {
     public void testToStringPriceDiscountPurchase() {
         Byn byn = new Byn(123);
         Byn byn1 = new Byn(100);
-        Byn byn2 =new Byn();
+        Byn byn2 = new Byn();
         PriceDiscountPurchase priceDiscountPurchase = new PriceDiscountPurchase("milk", byn, 10, byn1);
         PriceDiscountPurchase priceDiscountPurchase1 = new PriceDiscountPurchase("milk", byn, 10, byn2);
         PriceDiscountPurchase priceDiscountPurchase3 = new PriceDiscountPurchase();
         assertEquals("PriceDiscountPurchase;milk;1.23;10;1.00;2.30", priceDiscountPurchase.toString());
         assertEquals("PriceDiscountPurchase;milk;1.23;10;0.00;12.30", priceDiscountPurchase1.toString());
-        assertEquals("PriceDiscountPurchase;;0.00;0;0.00;0.00",priceDiscountPurchase3.toString());
+        assertEquals("PriceDiscountPurchase;;0.00;0;0.00;0.00", priceDiscountPurchase3.toString());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class TestRunner {
         PercentDiscountPurchase percentDiscountPurchase = new PercentDiscountPurchase("milk", byn, 10, 15.5);
         PercentDiscountPurchase percentDiscountPurchase1 = new PercentDiscountPurchase();
         assertEquals("PercentDiscountPurchase;milk;1.23;10;15.5;10.40", percentDiscountPurchase.toString());
-        assertEquals("PercentDiscountPurchase;;0.00;0;0.0;0.00",percentDiscountPurchase1.toString());
+        assertEquals("PercentDiscountPurchase;;0.00;0;0.0;0.00", percentDiscountPurchase1.toString());
 
     }
 
@@ -91,7 +91,7 @@ public class TestRunner {
         Byn byn1 = new Byn(1, 23);
         Byn byn2 = new Byn();
         Byn byn3 = new Byn(1234567);
-        Byn byn4= new Byn(123, 45);
+        Byn byn4 = new Byn(123, 45);
         assertEquals("1.23", byn.toString());
         assertEquals("1.23", byn1.toString());
         assertEquals("0.00", byn2.toString());
@@ -185,7 +185,7 @@ public class TestRunner {
     public void testMulDouble() {
         Byn byn = new Byn(1000);
         double x = 16.6;
-        assertEquals("8.40", byn.mul((100 - x) / 100, Byn.RoundMethod.CEIL, 1).toString());
+        assertEquals("8.40", byn.mul((100 - x) / 100, RoundMethod.CEIL, 1).toString());
     }
 
     @Test
@@ -193,9 +193,9 @@ public class TestRunner {
         Byn byn = new Byn(775);
         Byn byn1 = new Byn(771);
         Byn byn2 = new Byn(770);
-        assertEquals("7.80", byn.round(Byn.RoundMethod.CEIL, 1).toString());
-        assertEquals("7.80", byn1.round(Byn.RoundMethod.CEIL, 1).toString());
-        assertEquals("7.70", byn2.round(Byn.RoundMethod.CEIL, 1).toString());
+        assertEquals("7.80", byn.round(RoundMethod.CEIL, 1).toString());
+        assertEquals("7.80", byn1.round(RoundMethod.CEIL, 1).toString());
+        assertEquals("7.70", byn2.round(RoundMethod.CEIL, 1).toString());
     }
 
     @Test
@@ -203,9 +203,9 @@ public class TestRunner {
         Byn byn = new Byn(775);
         Byn byn1 = new Byn(774);
         Byn byn2 = new Byn(770);
-        assertEquals("7.80", byn.round(Byn.RoundMethod.ROUND, 1).toString());
-        assertEquals("7.70", byn1.round(Byn.RoundMethod.ROUND, 1).toString());
-        assertEquals("7.70", byn2.round(Byn.RoundMethod.ROUND, 1).toString());
+        assertEquals("7.80", byn.round(RoundMethod.ROUND, 1).toString());
+        assertEquals("7.70", byn1.round(RoundMethod.ROUND, 1).toString());
+        assertEquals("7.70", byn2.round(RoundMethod.ROUND, 1).toString());
     }
 
     @Test
@@ -213,9 +213,9 @@ public class TestRunner {
         Byn byn = new Byn(778);
         Byn byn1 = new Byn(771);
         Byn byn2 = new Byn(780);
-        assertEquals("7.70", byn.round(Byn.RoundMethod.FLOOR, 1).toString());
-        assertEquals("7.70", byn1.round(Byn.RoundMethod.FLOOR, 1).toString());
-        assertEquals("7.80", byn2.round(Byn.RoundMethod.FLOOR, 1).toString());
+        assertEquals("7.70", byn.round(RoundMethod.FLOOR, 1).toString());
+        assertEquals("7.70", byn1.round(RoundMethod.FLOOR, 1).toString());
+        assertEquals("7.80", byn2.round(RoundMethod.FLOOR, 1).toString());
     }
 
     @Test

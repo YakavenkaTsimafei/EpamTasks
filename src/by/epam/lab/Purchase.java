@@ -14,7 +14,7 @@ public class Purchase {
 
     public Purchase(Scanner sc) {
         this.name = sc.next();
-        this.price = new Byn(sc.nextInt());
+        this.price = new Byn(sc);
         this.number = sc.nextInt();
     }
 
