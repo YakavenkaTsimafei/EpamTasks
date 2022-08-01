@@ -1,6 +1,6 @@
 import by.epam.lab.*;
-
 import java.util.Arrays;
+
 
 public class Runner {
     public static void main(String[] args) {
@@ -12,8 +12,8 @@ public class Runner {
         Byn transportExpense1 = new Byn(20);
         AbstractPurchase[] purchases = {new PriceDiscountPurchase(product, 6, priceDiscount),
                 new PriceDiscountPurchase(product, 4, priceDiscount1),
-                new PercentDiscountPurchase(product, 8, 15.5),
                 new PercentDiscountPurchase(product, 6, 15.5),
+                new PercentDiscountPurchase(product, 4, 15.5),
                 new TransportExpenseWithPurchase(product, 5, transportExpense),
                 new TransportExpenseWithPurchase(product, 10, transportExpense1),
         };
@@ -24,12 +24,13 @@ public class Runner {
         System.out.println();
         System.out.println("Purchase with min cost :" + purchases[purchases.length - 1]);
         search(purchases);
+
     }
 
     private static void search(AbstractPurchase[] purchases) {
         Byn cost = new Byn(100);
         Product product = new Product("milk", cost);
-        int index = Arrays.binarySearch(purchases, new AbstractPurchase(product, 5) {
+        int index = Arrays.binarySearch(purchases, new PercentDiscountPurchase(product,6,15.5) {
         });
         if (index >= 0) {
             System.out.println("Purchase with a cost of 5: " + purchases[index]);

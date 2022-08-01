@@ -3,6 +3,9 @@ package by.epam.lab;
 public class TransportExpenseWithPurchase extends AbstractPurchase {
     private Byn transportExpense;
 
+    public TransportExpenseWithPurchase() {
+        this(new Product(null, new Byn(0)),0,new Byn(0));
+    }
     public TransportExpenseWithPurchase(Byn transportExpense) {
         this.transportExpense = transportExpense;
     }

@@ -3,7 +3,9 @@ package by.epam.lab;
 public class PriceDiscountPurchase extends AbstractPurchase {
     private Byn discount;
 
-
+    public PriceDiscountPurchase() {
+        this(new Product(null, new Byn(0)),0,new Byn(0));
+    }
     public PriceDiscountPurchase(Byn discount) {
         this.discount = discount;
     }

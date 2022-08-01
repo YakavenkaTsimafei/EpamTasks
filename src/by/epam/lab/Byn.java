@@ -2,7 +2,7 @@ package by.epam.lab;
 
 import java.util.Scanner;
 
-public class Byn {
+public class Byn implements Comparable<Byn> {
     private final int value;
 
     public Byn() {
@@ -25,6 +25,10 @@ public class Byn {
         this(byn.value);
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public int getRubs() {
         return this.value / 100;
     }
@@ -42,18 +46,25 @@ public class Byn {
         return new Byn(value * number);
     }
 
-    public int sb(Byn d) {
-        return (value - d.value);
-    }
-
     public Byn sub(Byn discount) {
         return new Byn(value - discount.value);
     }
 
-    public Byn mul(double k) {
-        return new Byn((int) Math.floor(value * k / 100) * 100);
+    public Byn mul(double k, RoundMethod roundMethod, int d) {
+       return new Byn(roundMethod.round(value * k, d));
     }
 
+    @Override
+    public int compareTo(Byn o) {
+        return (this.value - o.value);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Byn byn = (Byn) o;
+        return value == byn.value;
+    }
 
     @Override
     public String toString() {

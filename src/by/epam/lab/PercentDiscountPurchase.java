@@ -4,6 +4,10 @@ public class PercentDiscountPurchase extends AbstractPurchase {
     private double discount;
     private static final int DISCOUNT_QUANTITY = 5;
 
+    public PercentDiscountPurchase() {
+        this(new Product(null, new Byn(0)),0,0.00);
+    }
+
     public PercentDiscountPurchase(double discount) {
         this.discount = discount;
     }
@@ -25,7 +29,7 @@ public class PercentDiscountPurchase extends AbstractPurchase {
     public Byn getCost() {
         Byn x = super.getCost();
         if (getNumber() > DISCOUNT_QUANTITY) {
-            x = x.mul((100 - discount) / 100);
+            x = x.mul((100 - discount) / 100,RoundMethod.FLOOR,1);
         }
         return x;
     }
