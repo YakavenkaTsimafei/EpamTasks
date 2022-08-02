@@ -29,8 +29,7 @@ public class Runner {
     }
 
     private static void search(AbstractPurchase[] purchases, Byn cost) {
-        int index = Arrays.binarySearch(purchases, new PercentDiscountPurchase(new Product("", cost), 1, 0) {
-        });
+        int index = Arrays.binarySearch(purchases, new PercentDiscountPurchase(new Product("", cost), 1, 0));
         if (index >= 0) {
             System.out.println("Purchase with a cost of 5: " + purchases[index]);
         } else {
