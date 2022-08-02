@@ -8,7 +8,7 @@ public class Runner {
         Byn cost = new Byn(100);
         Product product = new Product("milk", cost);
         Byn priceDiscount = new Byn(100);
-        Byn priceDiscount1 = new Byn(50);
+        Byn priceDiscount1 = new Byn(15);
         Byn transportExpense = new Byn(150);
         Byn transportExpense1 = new Byn(20);
         AbstractPurchase[] purchases = {new PriceDiscountPurchase(product, 6, priceDiscount),
@@ -24,14 +24,12 @@ public class Runner {
         dataOutput(purchases);
         System.out.println();
         System.out.println("Purchase with min cost :" + purchases[purchases.length - 1]);
-        search(purchases);
+        search(purchases, new Byn(500));
 
     }
 
-    private static void search(AbstractPurchase[] purchases) {
-        Byn cost = new Byn(100);
-        Product product = new Product("milk", cost);
-        int index = Arrays.binarySearch(purchases, new PercentDiscountPurchase(product, 6, 15.5) {
+    private static void search(AbstractPurchase[] purchases, Byn cost) {
+        int index = Arrays.binarySearch(purchases, new PercentDiscountPurchase(new Product("", cost), 1, 0) {
         });
         if (index >= 0) {
             System.out.println("Purchase with a cost of 5: " + purchases[index]);

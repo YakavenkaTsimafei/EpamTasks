@@ -21,14 +21,6 @@ public class Byn implements Comparable<Byn> {
         this(rubs * 100 + coins);
     }
 
-    public Byn(Byn byn) {
-        this(byn.value);
-    }
-
-    public int getValue() {
-        return value;
-    }
-
     public int getRubs() {
         return this.value / 100;
     }
@@ -52,6 +44,10 @@ public class Byn implements Comparable<Byn> {
 
     public Byn mul(double k, RoundMethod roundMethod, int d) {
         return new Byn(roundMethod.round(value * k, d));
+    }
+
+    public Byn round(RoundMethod roundMethod,int d){
+        return new Byn(roundMethod.round(value,d));
     }
 
     @Override

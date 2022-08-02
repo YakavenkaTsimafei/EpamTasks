@@ -4,10 +4,7 @@ public class TransportExpenseWithPurchase extends AbstractPurchase {
     private Byn transportExpense;
 
     public TransportExpenseWithPurchase() {
-        this(new Product(null, new Byn(0)),0,new Byn(0));
-    }
-    public TransportExpenseWithPurchase(Byn transportExpense) {
-        this.transportExpense = transportExpense;
+        this(new Product(null, new Byn(0)), 0, new Byn(0));
     }
 
     public TransportExpenseWithPurchase(Product product, int number, Byn transportExpense) {
@@ -26,7 +23,7 @@ public class TransportExpenseWithPurchase extends AbstractPurchase {
 
     @Override
     public Byn getCost() {
-        return getProduct().getPrice().mul(getNumber()).add(transportExpense);
+        return getProduct().getPrice().mul(getNumber()).add(transportExpense).round(RoundMethod.FLOOR,2);
     }
 
     @Override

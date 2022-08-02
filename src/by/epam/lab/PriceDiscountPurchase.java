@@ -4,10 +4,7 @@ public class PriceDiscountPurchase extends AbstractPurchase {
     private Byn discount;
 
     public PriceDiscountPurchase() {
-        this(new Product(null, new Byn(0)),0,new Byn(0));
-    }
-    public PriceDiscountPurchase(Byn discount) {
-        this.discount = discount;
+        this(new Product(null, new Byn(0)), 0, new Byn(0));
     }
 
     public PriceDiscountPurchase(Product product, int number, Byn discount) {
@@ -26,7 +23,7 @@ public class PriceDiscountPurchase extends AbstractPurchase {
 
     @Override
     public Byn getCost() {
-        return getProduct().getPrice().sub(discount).mul(getNumber());
+        return getProduct().getPrice().sub(discount).mul(getNumber()).round(RoundMethod.FLOOR, 2);
     }
 
     @Override

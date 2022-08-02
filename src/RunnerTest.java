@@ -32,7 +32,7 @@ public class RunnerTest {
         Byn transportExpense = new Byn(150);
         AbstractPurchase purchase = new TransportExpenseWithPurchase(product, 5, transportExpense);
         AbstractPurchase purchase1 = new TransportExpenseWithPurchase();
-        assertEquals("TransportExpenseWithPurchase;milk;1.00;5;1.50;6.50", purchase.toString());
+        assertEquals("TransportExpenseWithPurchase;milk;1.00;5;1.50;6.00", purchase.toString());
         assertEquals("TransportExpenseWithPurchase;null;0.00;0;0.00;0.00", purchase1.toString());
 
     }
@@ -73,8 +73,8 @@ public class RunnerTest {
     @Test
     public void testGetCostPriceDiscountPurchase() {
         Byn cost = new Byn(100);
-        Byn priceDiscount = new Byn(50);
-        Byn toCheck = new Byn(200);
+        Byn priceDiscount = new Byn(15);
+        Byn toCheck = new Byn(300);
         Product product = new Product("milk", cost);
         AbstractPurchase purchase = new PriceDiscountPurchase(product, 4, priceDiscount);
         assertEquals(toCheck, purchase.getCost());
@@ -99,7 +99,7 @@ public class RunnerTest {
         Byn cost = new Byn(100);
         Product product = new Product("milk", cost);
         Byn transportExpense = new Byn(150);
-        Byn toCheck = new Byn(650);
+        Byn toCheck = new Byn(600);
         AbstractPurchase purchase = new TransportExpenseWithPurchase(product, 5, transportExpense);
         assertEquals(toCheck, purchase.getCost());
         assertNotEquals(cost, purchase.getCost());
