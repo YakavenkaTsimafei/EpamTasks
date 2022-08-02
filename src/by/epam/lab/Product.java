@@ -5,7 +5,7 @@ public class Product {
     private Byn price;
 
     public Product() {
-        this(null,new Byn(0));
+        this(null, new Byn(0));
     }
 
     public Product(String name, Byn price) {

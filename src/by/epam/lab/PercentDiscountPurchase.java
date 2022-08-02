@@ -29,7 +29,7 @@ public class PercentDiscountPurchase extends AbstractPurchase {
     public Byn getCost() {
         Byn x = super.getCost();
         if (getNumber() > DISCOUNT_QUANTITY) {
-            x = x.mul((100 - discount) / 100,RoundMethod.FLOOR,1);
+            x = x.mul((100 - discount) / 100, RoundMethod.FLOOR, 1);
         }
         return x;
     }

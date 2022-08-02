@@ -1,4 +1,5 @@
 import by.epam.lab.*;
+
 import java.util.Arrays;
 
 
@@ -30,7 +31,7 @@ public class Runner {
     private static void search(AbstractPurchase[] purchases) {
         Byn cost = new Byn(100);
         Product product = new Product("milk", cost);
-        int index = Arrays.binarySearch(purchases, new PercentDiscountPurchase(product,6,15.5) {
+        int index = Arrays.binarySearch(purchases, new PercentDiscountPurchase(product, 6, 15.5) {
         });
         if (index >= 0) {
             System.out.println("Purchase with a cost of 5: " + purchases[index]);

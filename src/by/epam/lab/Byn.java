@@ -51,13 +51,14 @@ public class Byn implements Comparable<Byn> {
     }
 
     public Byn mul(double k, RoundMethod roundMethod, int d) {
-       return new Byn(roundMethod.round(value * k, d));
+        return new Byn(roundMethod.round(value * k, d));
     }
 
     @Override
     public int compareTo(Byn o) {
         return (this.value - o.value);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
