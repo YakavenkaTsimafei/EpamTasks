@@ -23,7 +23,7 @@ public class TransportExpenseWithPurchase extends AbstractPurchase {
 
     @Override
     public Byn getCost() {
-        return getProduct().getPrice().mul(getNumber()).add(transportExpense).round(RoundMethod.FLOOR,2);
+        return getProduct().getPrice().mul(getNumber()).add(transportExpense).round(RoundMethod.FLOOR, 2);
     }
 
     @Override

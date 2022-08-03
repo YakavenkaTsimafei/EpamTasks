@@ -46,8 +46,8 @@ public class Byn implements Comparable<Byn> {
         return new Byn(roundMethod.round(value * k, d));
     }
 
-    public Byn round(RoundMethod roundMethod,int d){
-        return new Byn(roundMethod.round(value,d));
+    public Byn round(RoundMethod roundMethod, int d) {
+        return new Byn(roundMethod.round(value, d));
     }
 
     @Override

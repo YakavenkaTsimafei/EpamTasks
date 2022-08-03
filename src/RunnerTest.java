@@ -182,12 +182,6 @@ public class RunnerTest {
     }
 
     private static int search(AbstractPurchase[] purchases, Byn cost) {
-        int index = Arrays.binarySearch(purchases, new PercentDiscountPurchase(new Product("", cost), 1, 0));
-        if (index >= 0) {
-            return index;
-        }
-        return -1;
+        return Arrays.binarySearch(purchases, new PercentDiscountPurchase(new Product("", cost), 1, 0));
     }
-
-
 }
