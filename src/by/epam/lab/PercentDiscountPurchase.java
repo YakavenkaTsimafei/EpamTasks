@@ -13,7 +13,6 @@ public class PercentDiscountPurchase extends AbstractPurchase {
     }
 
     public PercentDiscountPurchase() {
-        discount = 0.00;
     }
 
     public PercentDiscountPurchase(Product product, int number, double discount) {
