@@ -9,7 +9,7 @@ public class TransportExpenseWithPurchase extends AbstractPurchase {
     }
 
     public TransportExpenseWithPurchase() {
-        this(new Product(null, new Byn(0)), 0, new Byn(0));
+        transportExpense = new Byn();
     }
 
     public TransportExpenseWithPurchase(Product product, int number, Byn transportExpense) {

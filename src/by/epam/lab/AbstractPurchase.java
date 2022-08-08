@@ -8,7 +8,7 @@ public abstract class AbstractPurchase implements Comparable<AbstractPurchase> {
 
 
     public AbstractPurchase() {
-        this(null, 0);
+        product = new Product();
     }
 
     public AbstractPurchase(Product product, int number) {

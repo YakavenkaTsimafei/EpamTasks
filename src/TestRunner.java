@@ -5,9 +5,9 @@ import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-public class RunnerTest {
+public class TestRunner {
     @Test
-    public void TestToStringPriceDiscountPurchase() {
+    public void testToStringPriceDiscountPurchase() {
         Byn cost = new Byn(100);
         Byn priceDiscount = new Byn(50);
         Product product = new Product("milk", cost);
@@ -18,7 +18,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestToStringPercentDiscountPurchase() {
+    public void testToStringPercentDiscountPurchase() {
         Byn cost = new Byn(100);
         final Product PRODUCT = new Product("milk", cost);
         AbstractPurchase purchase = new PercentDiscountPurchase(PRODUCT, 8, 15.5);
@@ -28,7 +28,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestToStringTransportExpenseWithPurchase() {
+    public void testToStringTransportExpenseWithPurchase() {
         Byn cost = new Byn(100);
         final Product PRODUCT = new Product("milk", cost);
         Byn transportExpense = new Byn(150);
@@ -97,7 +97,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestTGetCostTransportExpenseWithPurchase() {
+    public void testTGetCostTransportExpenseWithPurchase() {
         Byn cost = new Byn(100);
         final Product PRODUCT = new Product("milk", cost);
         Byn transportExpense = new Byn(150);
@@ -108,7 +108,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestBynCompareTo() {
+    public void testBynCompareTo() {
         Byn byn = new Byn(100);
         Byn byn1 = new Byn(150);
         assertEquals(50, byn1.compareTo(byn));
@@ -116,7 +116,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestAdd() {
+    public void testBynAdd() {
         Byn byn = new Byn(100);
         Byn byn1 = new Byn(150);
         Byn toCheck = new Byn(250);
@@ -125,7 +125,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestMul() {
+    public void testBynMul() {
         Byn byn = new Byn(100);
         Byn toCheck = new Byn(500);
         assertEquals(toCheck, byn.mul(5));
@@ -133,7 +133,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestMulDouble() {
+    public void testBynMulDouble() {
         Byn byn = new Byn(100);
         Byn toCheck = new Byn(80);
         Byn toCheck1 = new Byn(84);
@@ -142,7 +142,7 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestSub() {
+    public void testBynSub() {
         Byn byn = new Byn(100);
         Byn byn1 = new Byn(50);
         Byn toCheck = new Byn(50);
@@ -161,10 +161,10 @@ public class RunnerTest {
     }
 
     @Test
-    public void TestBinarySearch() {
+    public void testBinarySearch() {
         Byn cost = new Byn(100);
         final Product PRODUCT = new Product("milk", cost);
-        AbstractPurchase[] purchases = {new PriceDiscountPurchase(PRODUCT, 6, new Byn(15)),
+        AbstractPurchase[] purchases = {new PriceDiscountPurchase(PRODUCT, 6, new Byn(35)),
                 new PriceDiscountPurchase(PRODUCT, 4, new Byn(50)),
                 new PercentDiscountPurchase(PRODUCT, 6, 15.5),
                 new PercentDiscountPurchase(PRODUCT, 4, 15.5),
@@ -175,13 +175,14 @@ public class RunnerTest {
         for (AbstractPurchase p : purchases) {
             System.out.println(p);
         }
-        assertEquals(0, search(purchases, new Byn(1200)));
-        assertEquals(5, search(purchases, new Byn(200)));
-        assertNotEquals(2, search(purchases, new Byn(400)));
+        assertEquals(0, Runner.search(purchases, new Byn(1200)));
+        assertEquals(1, Runner.search(purchases, new Byn(600)));
+        assertEquals(5, Runner.search(purchases, new Byn(200)));
+        assertEquals(3, Runner.search(purchases, new Byn(400)));
+        assertEquals(4, Runner.search(purchases, new Byn(300)));
+        assertNotEquals(2, Runner.search(purchases, new Byn(400)));
+        assertEquals(-1, Runner.search(purchases, new Byn(1567)));
 
-    }
 
-    private static int search(AbstractPurchase[] purchases, Byn cost) {
-        return Arrays.binarySearch(purchases, new PercentDiscountPurchase(new Product("", cost), 1, 0));
     }
 }

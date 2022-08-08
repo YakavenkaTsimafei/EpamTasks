@@ -9,7 +9,7 @@ public class PriceDiscountPurchase extends AbstractPurchase {
     }
 
     public PriceDiscountPurchase() {
-        this(new Product(null, new Byn(0)), 0, new Byn(0));
+        discount = new Byn();
     }
 
     public PriceDiscountPurchase(Product product, int number, Byn discount) {
