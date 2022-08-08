@@ -20,8 +20,8 @@ public class RunnerTest {
     @Test
     public void TestToStringPercentDiscountPurchase() {
         Byn cost = new Byn(100);
-        Product product = new Product("milk", cost);
-        AbstractPurchase purchase = new PercentDiscountPurchase(product, 8, 15.5);
+        final Product PRODUCT = new Product("milk", cost);
+        AbstractPurchase purchase = new PercentDiscountPurchase(PRODUCT, 8, 15.5);
         AbstractPurchase purchase1 = new PercentDiscountPurchase();
         assertEquals("PercentDiscountPurchase;milk;1.00;8;15.5;6.00", purchase.toString());
         assertEquals("PercentDiscountPurchase;null;0.00;0;0.0;0.00", purchase1.toString());
@@ -30,9 +30,9 @@ public class RunnerTest {
     @Test
     public void TestToStringTransportExpenseWithPurchase() {
         Byn cost = new Byn(100);
-        Product product = new Product("milk", cost);
+        final Product PRODUCT = new Product("milk", cost);
         Byn transportExpense = new Byn(150);
-        AbstractPurchase purchase = new TransportExpenseWithPurchase(product, 5, transportExpense);
+        AbstractPurchase purchase = new TransportExpenseWithPurchase(PRODUCT, 5, transportExpense);
         AbstractPurchase purchase1 = new TransportExpenseWithPurchase();
         assertEquals("TransportExpenseWithPurchase;milk;1.00;5;1.50;6.00", purchase.toString());
         assertEquals("TransportExpenseWithPurchase;null;0.00;0;0.00;0.00", purchase1.toString());
@@ -56,10 +56,10 @@ public class RunnerTest {
     @Test
     public void testToStringProduct() {
         Byn byn = new Byn(123);
-        Product product = new Product("Milk", byn);
-        Product product1 = new Product();
-        assertEquals("Milk;1.23", product.toString());
-        assertEquals("null;0.00", product1.toString());
+        final Product PRODUCT = new Product("Milk", byn);
+        final Product PRODUCT1 = new Product();
+        assertEquals("Milk;1.23", PRODUCT.toString());
+        assertEquals("null;0.00", PRODUCT1.toString());
     }
 
     @Test
@@ -77,8 +77,8 @@ public class RunnerTest {
         Byn cost = new Byn(100);
         Byn priceDiscount = new Byn(15);
         Byn toCheck = new Byn(300);
-        Product product = new Product("milk", cost);
-        AbstractPurchase purchase = new PriceDiscountPurchase(product, 4, priceDiscount);
+        final Product PRODUCT = new Product("milk", cost);
+        AbstractPurchase purchase = new PriceDiscountPurchase(PRODUCT, 4, priceDiscount);
         assertEquals(toCheck, purchase.getCost());
         assertNotEquals(cost, purchase.getCost());
     }
@@ -86,11 +86,11 @@ public class RunnerTest {
     @Test
     public void testGetCostPercentDiscountPurchase() {
         Byn cost = new Byn(100);
-        Product product = new Product("milk", cost);
+        final Product PRODUCT = new Product("milk", cost);
         Byn toCheck = new Byn(600);
         Byn toCheck1 = new Byn(400);
-        AbstractPurchase purchase = new PercentDiscountPurchase(product, 8, 15.5);
-        AbstractPurchase purchase1 = new PercentDiscountPurchase(product, 4, 15.5);
+        AbstractPurchase purchase = new PercentDiscountPurchase(PRODUCT, 8, 15.5);
+        AbstractPurchase purchase1 = new PercentDiscountPurchase(PRODUCT, 4, 15.5);
         assertEquals(toCheck, purchase.getCost());
         assertEquals(toCheck1, purchase1.getCost());
         assertNotEquals(toCheck1, purchase.getCost());
@@ -99,10 +99,10 @@ public class RunnerTest {
     @Test
     public void TestTGetCostTransportExpenseWithPurchase() {
         Byn cost = new Byn(100);
-        Product product = new Product("milk", cost);
+        final Product PRODUCT = new Product("milk", cost);
         Byn transportExpense = new Byn(150);
         Byn toCheck = new Byn(600);
-        AbstractPurchase purchase = new TransportExpenseWithPurchase(product, 5, transportExpense);
+        AbstractPurchase purchase = new TransportExpenseWithPurchase(PRODUCT, 5, transportExpense);
         assertEquals(toCheck, purchase.getCost());
         assertNotEquals(cost, purchase.getCost());
     }
@@ -163,13 +163,13 @@ public class RunnerTest {
     @Test
     public void TestBinarySearch() {
         Byn cost = new Byn(100);
-        Product product = new Product("milk", cost);
-        AbstractPurchase[] purchases = {new PriceDiscountPurchase(product, 6, new Byn(15)),
-                new PriceDiscountPurchase(product, 4, new Byn(50)),
-                new PercentDiscountPurchase(product, 6, 15.5),
-                new PercentDiscountPurchase(product, 4, 15.5),
-                new TransportExpenseWithPurchase(product, 5, new Byn(150)),
-                new TransportExpenseWithPurchase(product, 10, new Byn((250))),
+        final Product PRODUCT = new Product("milk", cost);
+        AbstractPurchase[] purchases = {new PriceDiscountPurchase(PRODUCT, 6, new Byn(15)),
+                new PriceDiscountPurchase(PRODUCT, 4, new Byn(50)),
+                new PercentDiscountPurchase(PRODUCT, 6, 15.5),
+                new PercentDiscountPurchase(PRODUCT, 4, 15.5),
+                new TransportExpenseWithPurchase(PRODUCT, 5, new Byn(150)),
+                new TransportExpenseWithPurchase(PRODUCT, 10, new Byn((250))),
         };
         Arrays.sort(purchases);
         for (AbstractPurchase p : purchases) {

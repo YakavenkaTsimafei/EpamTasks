@@ -7,7 +7,7 @@ public class PercentDiscountPurchase extends AbstractPurchase {
     @Override
     protected Byn getFinalCost(Byn baseCost) {
         if (getNumber() > DISCOUNT_QUANTITY) {
-            return baseCost.mul((100 - discount) / 100, RoundMethod.FLOOR, 2);
+            baseCost = baseCost.mul((100 - discount) / 100, RoundMethod.FLOOR, 2);
         }
         return baseCost;
     }

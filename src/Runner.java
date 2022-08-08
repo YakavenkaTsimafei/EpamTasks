@@ -6,24 +6,24 @@ import java.util.Arrays;
 public class Runner {
     public static void main(String[] args) {
         Byn cost = new Byn(100);
-        Product product = new Product("milk", cost);
+        final Product PRODUCT = new Product("milk", cost);
         Byn priceDiscount = new Byn(100);
         Byn priceDiscount1 = new Byn(15);
         Byn transportExpense = new Byn(150);
         Byn transportExpense1 = new Byn(20);
-        AbstractPurchase[] purchases = {new PriceDiscountPurchase(product, 6, priceDiscount),
-                new PriceDiscountPurchase(product, 4, priceDiscount1),
-                new PercentDiscountPurchase(product, 6, 15.5),
-                new PercentDiscountPurchase(product, 4, 15.5),
-                new TransportExpenseWithPurchase(product, 5, transportExpense),
-                new TransportExpenseWithPurchase(product, 10, transportExpense1),
+        AbstractPurchase[] purchases = {new PriceDiscountPurchase(PRODUCT, 6, priceDiscount),
+                new PriceDiscountPurchase(PRODUCT, 4, priceDiscount1),
+                new PercentDiscountPurchase(PRODUCT, 6, 15.5),
+                new PercentDiscountPurchase(PRODUCT, 4, 15.5),
+                new TransportExpenseWithPurchase(PRODUCT, 5, transportExpense),
+                new TransportExpenseWithPurchase(PRODUCT, 10, transportExpense1),
         };
         dataOutput(purchases);
         Arrays.sort(purchases);
         System.out.println();
         dataOutput(purchases);
         System.out.println();
-        System.out.println("Purchase with min cost :" + purchases[purchases.length - 1]);
+        System.out.println("Purchase with min cost :" + purchases[purchases.length - 1].getCost());
         search(purchases, new Byn(500));
 
     }
