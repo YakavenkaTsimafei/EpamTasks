@@ -29,7 +29,7 @@ public class TestRunner {
                 }
 
             }
-            strResult.insert(0,RESULT_HEAD).append(RESULT_TAIL).append(result);
+            strResult.insert(0, RESULT_HEAD).append(RESULT_TAIL).append(result);
             if (strResult.substring(7, 10).equals(MINUS)) {
                 strResult.replace(7, 13, String.valueOf(Double.parseDouble(strResult.substring(9, 13)) * -1));
             } else strResult.delete(7, 10);
@@ -54,7 +54,7 @@ public class TestRunner {
         String expectedIn1 = "result(5.2 - 3.14 + 0.0) = 2.06";
         assertEquals(expectedIn1, result.toString());
         System.out.println(result);
-        System.out.println("error-lines = "+errorLines);
+        System.out.println("error-lines = " + errorLines);
     }
 
     @Test
@@ -65,7 +65,7 @@ public class TestRunner {
         String expectedIn1 = "result(-3.1 - 1.0) = -4.1";
         assertEquals(expectedIn1, result.toString());
         System.out.println(result);
-        System.out.println("error-lines = "+errorLines);
+        System.out.println("error-lines = " + errorLines);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class TestRunner {
         String expectedIn2 = "result(0.75) = 0.75";
         assertEquals(expectedIn2, result.toString());
         System.out.println(result);
-        System.out.println("error-lines = "+errorLines);
+        System.out.println("error-lines = " + errorLines);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class TestRunner {
         String expectedIn3 = "result(0.0) = 0.0";
         assertEquals(expectedIn3, result.toString());
         System.out.println(result);
-        System.out.println("error-lines = "+errorLines);
+        System.out.println("error-lines = " + errorLines);
     }
 
     @Test(expected = FileNotFoundException.class)
