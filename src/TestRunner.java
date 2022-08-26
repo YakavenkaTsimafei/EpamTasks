@@ -18,13 +18,15 @@ public class TestRunner {
             while (sc.hasNext()) {
                 String line = sc.nextLine();
                 String[] number = line.split(";");
-                if (isNumeric(number)) {
+                try {
+                    Double.parseDouble(number[Integer.parseInt(number[0])]);
                     result += Double.parseDouble(number[Integer.parseInt(number[0])]);
                     if (Double.parseDouble(number[Integer.parseInt(number[0])]) >= 0) {
                         strResult.append(PLUS).append(Double.parseDouble(number[Integer.parseInt(number[0])]));
-                    } else
+                    } else {
                         strResult.append(MINUS).append(Double.parseDouble(number[Integer.parseInt(number[0])]) * -1);
-                } else {
+                    }
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     errorLines++;
                 }
 
@@ -32,20 +34,13 @@ public class TestRunner {
             strResult.insert(0, RESULT_HEAD).append(RESULT_TAIL).append(result);
             if (strResult.substring(7, 10).equals(MINUS)) {
                 strResult.replace(7, 13, String.valueOf(Double.parseDouble(strResult.substring(9, 13)) * -1));
-            } else strResult.delete(7, 10);
+            } else {
+                strResult.delete(7, 10);
+            }
             System.out.println(strResult);
             System.out.println("error-lines = " + errorLines);
             return errorLines;
 
-        }
-    }
-
-    private static boolean isNumeric(String[] number) {
-        try {
-            Double.parseDouble(number[Integer.parseInt(number[0])]);
-            return true;
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            return false;
         }
     }
 
