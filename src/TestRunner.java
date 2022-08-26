@@ -19,7 +19,6 @@ public class TestRunner {
                 String line = sc.nextLine();
                 String[] number = line.split(";");
                 try {
-                    Double.parseDouble(number[Integer.parseInt(number[0])]);
                     result += Double.parseDouble(number[Integer.parseInt(number[0])]);
                     if (Double.parseDouble(number[Integer.parseInt(number[0])]) >= 0) {
                         strResult.append(PLUS).append(Double.parseDouble(number[Integer.parseInt(number[0])]));
