@@ -11,7 +11,8 @@ public class TestRunner {
         try (Scanner sc = new Scanner(new FileReader("src\\by\\epam\\lab\\" + csvName))) {
             final String PLUS = " + ";
             final String MINUS = " - ";
-            final String EQUALLY = " = ";
+            final String RESULT_HEAD = "result(";
+            final String RESULT_TAIL = ") = ";
             double result = 0;
             int errorLines = 0;
             while (sc.hasNext()) {
@@ -21,16 +22,17 @@ public class TestRunner {
                     result += Double.parseDouble(number[Integer.parseInt(number[0])]);
                     if (Double.parseDouble(number[Integer.parseInt(number[0])]) >= 0) {
                         strResult.append(PLUS).append(Double.parseDouble(number[Integer.parseInt(number[0])]));
-                    } else strResult.append(MINUS).append(Double.parseDouble(number[Integer.parseInt(number[0])]) * -1);
+                    } else
+                        strResult.append(MINUS).append(Double.parseDouble(number[Integer.parseInt(number[0])]) * -1);
                 } else {
                     errorLines++;
                 }
 
             }
-            strResult.append(EQUALLY).append(result);
-            if (strResult.substring(0, 3).equals(MINUS)) {
-                strResult.replace(0, 6, String.valueOf(Double.parseDouble(strResult.substring(2, 6)) * -1));
-            } else strResult.delete(0, 3);
+            strResult.insert(0,RESULT_HEAD).append(RESULT_TAIL).append(result);
+            if (strResult.substring(7, 10).equals(MINUS)) {
+                strResult.replace(7, 13, String.valueOf(Double.parseDouble(strResult.substring(9, 13)) * -1));
+            } else strResult.delete(7, 10);
             return errorLines;
         }
     }
@@ -49,8 +51,10 @@ public class TestRunner {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in.txt", result);
         assertEquals(3, errorLines);
-        String expectedIn1 = "5.2 - 3.14 + 0.0 = 2.06";
+        String expectedIn1 = "result(5.2 - 3.14 + 0.0) = 2.06";
         assertEquals(expectedIn1, result.toString());
+        System.out.println(result);
+        System.out.println("error-lines = "+errorLines);
     }
 
     @Test
@@ -58,8 +62,10 @@ public class TestRunner {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in1.txt", result);
         assertEquals(0, errorLines);
-        String expectedIn1 = "-3.1 - 1.0 = -4.1";
+        String expectedIn1 = "result(-3.1 - 1.0) = -4.1";
         assertEquals(expectedIn1, result.toString());
+        System.out.println(result);
+        System.out.println("error-lines = "+errorLines);
     }
 
     @Test
@@ -67,8 +73,10 @@ public class TestRunner {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in2.txt", result);
         assertEquals(0, errorLines);
-        String expectedIn2 = "0.75 = 0.75";
+        String expectedIn2 = "result(0.75) = 0.75";
         assertEquals(expectedIn2, result.toString());
+        System.out.println(result);
+        System.out.println("error-lines = "+errorLines);
     }
 
     @Test
@@ -76,18 +84,16 @@ public class TestRunner {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in3.txt", result);
         assertEquals(0, errorLines);
-        String expectedIn3 = "0.0 = 0.0";
+        String expectedIn3 = "result(0.0) = 0.0";
         assertEquals(expectedIn3, result.toString());
+        System.out.println(result);
+        System.out.println("error-lines = "+errorLines);
     }
 
     @Test(expected = FileNotFoundException.class)
     public void testWrongCsvName() throws FileNotFoundException {
-        StringBuilder result = new StringBuilder();
-        int errorLines = getResult("", result);
-        assertEquals(0,errorLines);
-        String expected = "0.0 = 0.0";
-        assertEquals(expected,result.toString());
-
+        Scanner sc = new Scanner(new FileReader(("")));
+        sc.close();
     }
 
 
