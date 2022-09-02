@@ -19,15 +19,14 @@ public class TestRunner {
         try (Scanner sc = new Scanner(new FileReader("src\\by\\epam\\lab\\" + csvName))) {
             double result = 0;
             int errorLines = 0;
+            double toDefineTheSign = 0;
             while (sc.hasNext()) {
                 String[] number = sc.nextLine().split(DELIMITER);
                 try {
-                    result += Double.parseDouble(number[Integer.parseInt(number[0])]);
-                    if (Double.parseDouble(number[Integer.parseInt(number[0])]) >= 0) {
-                        strResult.append(PLUS).append(Double.parseDouble(number[Integer.parseInt(number[0])]));
-                    } else {
-                        strResult.append(MINUS).append(Double.parseDouble(number[Integer.parseInt(number[0])]) * -1);
-                    }
+                    toDefineTheSign = Double.parseDouble(number[Integer.parseInt(number[0])]);
+                    result += toDefineTheSign;
+                    String sing = (toDefineTheSign >= 0) ? PLUS : MINUS;
+                    strResult.append(sing).append(Math.abs(toDefineTheSign));
                 } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     errorLines++;
                 }
