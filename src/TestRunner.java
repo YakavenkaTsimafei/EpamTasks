@@ -9,15 +9,18 @@ import static org.junit.Assert.assertEquals;
 public class TestRunner {
     private static int getResult(String csvName, StringBuilder strResult) throws FileNotFoundException {
         try (Scanner sc = new Scanner(new FileReader("src\\by\\epam\\lab\\" + csvName))) {
-            final String PLUS = " + ";
-            final String MINUS = " - ";
+            final String BEFORE_SIGN = " ";
+            final String AFTER_SIGN = " ";
+            final String PLUS = BEFORE_SIGN + "+" + AFTER_SIGN;
+            final String MINUS = BEFORE_SIGN + "-" + AFTER_SIGN;
+            final String DELIMITER = ";";
             final String RESULT_HEAD = "result(";
             final String RESULT_TAIL = ") = ";
             double result = 0;
             int errorLines = 0;
             while (sc.hasNext()) {
                 String line = sc.nextLine();
-                String[] number = line.split(";");
+                String[] number = line.split( DELIMITER);
                 try {
                     result += Double.parseDouble(number[Integer.parseInt(number[0])]);
                     if (Double.parseDouble(number[Integer.parseInt(number[0])]) >= 0) {
