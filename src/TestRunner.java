@@ -7,20 +7,20 @@ import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
 
 public class TestRunner {
+    final static String BEFORE_SIGN = " ";
+    final static String AFTER_SIGN = " ";
+    final static String PLUS = BEFORE_SIGN + "+" + AFTER_SIGN;
+    final static String MINUS = BEFORE_SIGN + "-" + AFTER_SIGN;
+    final static String DELIMITER = ";";
+    final static String RESULT_HEAD = "result(";
+    final static String RESULT_TAIL = ") = ";
+
     private static int getResult(String csvName, StringBuilder strResult) throws FileNotFoundException {
         try (Scanner sc = new Scanner(new FileReader("src\\by\\epam\\lab\\" + csvName))) {
-            final String BEFORE_SIGN = " ";
-            final String AFTER_SIGN = " ";
-            final String PLUS = BEFORE_SIGN + "+" + AFTER_SIGN;
-            final String MINUS = BEFORE_SIGN + "-" + AFTER_SIGN;
-            final String DELIMITER = ";";
-            final String RESULT_HEAD = "result(";
-            final String RESULT_TAIL = ") = ";
             double result = 0;
             int errorLines = 0;
             while (sc.hasNext()) {
-                String line = sc.nextLine();
-                String[] number = line.split( DELIMITER);
+                String[] number = sc.nextLine().split(DELIMITER);
                 try {
                     result += Double.parseDouble(number[Integer.parseInt(number[0])]);
                     if (Double.parseDouble(number[Integer.parseInt(number[0])]) >= 0) {
@@ -33,12 +33,18 @@ public class TestRunner {
                 }
 
             }
-            strResult.insert(0, RESULT_HEAD).append(RESULT_TAIL).append(result);
-            if (strResult.substring(7, 10).equals(MINUS)) {
-                strResult.replace(7, 13, String.valueOf(Double.parseDouble(strResult.substring(9, 13)) * -1));
-            } else {
-                strResult.delete(7, 10);
+            if (strResult.length() > 0) {
+                final int SING_MINUS_LENGTH = MINUS.length();
+                final int SING_PLUS_LENGTH = PLUS.length();
+                final char CHAR_MINUS = '-';
+                if (strResult.substring(0, SING_MINUS_LENGTH).equals(MINUS)) {
+                    strResult.replace(0, SING_MINUS_LENGTH, String.valueOf(CHAR_MINUS));
+                }
+                if (strResult.substring(0, SING_PLUS_LENGTH).equals(PLUS)) {
+                    strResult.delete(0, SING_PLUS_LENGTH);
+                }
             }
+            strResult.insert(0, RESULT_HEAD).append(RESULT_TAIL).append(result);
             System.out.println(strResult);
             System.out.println("error-lines = " + errorLines);
             return errorLines;
@@ -51,7 +57,7 @@ public class TestRunner {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in.txt", result);
         assertEquals(3, errorLines);
-        String expectedIn1 = "result(5.2 - 3.14 + 0.0) = 2.06";
+        String expectedIn1 = RESULT_HEAD + "5.2" + MINUS + "3.14" + PLUS + "0.0" + RESULT_TAIL + "2.06";
         assertEquals(expectedIn1, result.toString());
     }
 
@@ -60,7 +66,7 @@ public class TestRunner {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in1.txt", result);
         assertEquals(0, errorLines);
-        String expectedIn1 = "result(-3.1 - 1.0) = -4.1";
+        String expectedIn1 = RESULT_HEAD + "-3.1" + MINUS + "1.0" + RESULT_TAIL + "-4.1";
         assertEquals(expectedIn1, result.toString());
     }
 
@@ -69,7 +75,7 @@ public class TestRunner {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in2.txt", result);
         assertEquals(0, errorLines);
-        String expectedIn2 = "result(0.75) = 0.75";
+        String expectedIn2 = RESULT_HEAD + "0.75" + RESULT_TAIL + "0.75";
         assertEquals(expectedIn2, result.toString());
     }
 
@@ -78,7 +84,7 @@ public class TestRunner {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in3.txt", result);
         assertEquals(0, errorLines);
-        String expectedIn3 = "result(0.0) = 0.0";
+        String expectedIn3 = RESULT_HEAD + "0.0" + RESULT_TAIL + "0.0";
         assertEquals(expectedIn3, result.toString());
     }
 
