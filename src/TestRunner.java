@@ -88,6 +88,15 @@ public class TestRunner {
         assertEquals(expectedIn3, result.toString());
     }
 
+    @Test
+    public void testMainIn4() throws FileNotFoundException {
+        StringBuilder result = new StringBuilder();
+        int errorLines = getResult("in4.txt", result);
+        assertEquals(1, errorLines);
+        String expectedIn3 = RESULT_HEAD + RESULT_TAIL + "0.0";
+        assertEquals(expectedIn3, result.toString());
+    }
+
     @Test(expected = FileNotFoundException.class)
     public void testWrongCsvName() throws FileNotFoundException {
         Scanner sc = new Scanner(new FileReader(("")));
