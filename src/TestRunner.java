@@ -52,7 +52,7 @@ public class TestRunner {
     }
 
     @Test
-    public void testMainIn() throws FileNotFoundException {
+    public void testMainCase1() throws FileNotFoundException {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in.txt", result);
         assertEquals(3, errorLines);
@@ -61,7 +61,7 @@ public class TestRunner {
     }
 
     @Test
-    public void testMainIn1() throws FileNotFoundException {
+    public void testMainInCase2() throws FileNotFoundException {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in1.txt", result);
         assertEquals(0, errorLines);
@@ -70,7 +70,7 @@ public class TestRunner {
     }
 
     @Test
-    public void testMainIn2() throws FileNotFoundException {
+    public void testMainCase3() throws FileNotFoundException {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in2.txt", result);
         assertEquals(0, errorLines);
@@ -79,7 +79,7 @@ public class TestRunner {
     }
 
     @Test
-    public void testMainIn3() throws FileNotFoundException {
+    public void testMainCase4() throws FileNotFoundException {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in3.txt", result);
         assertEquals(0, errorLines);
@@ -88,7 +88,7 @@ public class TestRunner {
     }
 
     @Test
-    public void testMainIn4() throws FileNotFoundException {
+    public void testMainCase5() throws FileNotFoundException {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in4.txt", result);
         assertEquals(1, errorLines);
