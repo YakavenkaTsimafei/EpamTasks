@@ -1,7 +1,8 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.Enumeration;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,7 +10,7 @@ import java.util.regex.Pattern;
 public class TestRunner {
     final static String SUM = "sum = ";
 
-    private static int getResult(String propertiesName, StringBuilder strResult) {
+    private static int getResult(String propertiesName, StringBuilder strResult) throws MissingResourceException {
         ResourceBundle rb = ResourceBundle.getBundle(propertiesName);
         Enumeration<String> keys = rb.getKeys();
         String key;
@@ -36,44 +37,49 @@ public class TestRunner {
                             Integer.parseInt(matcher2.group());
                             Double.parseDouble(rb.getString(key2));
                             Double.parseDouble(matcher2.group() + rb.getString(key2));
-                            result += Double.parseDouble(rb.getString("value" + matcher2.group() + rb.getString(key2))) - 0.0000000000000002;
+                            result += Double.parseDouble(rb.getString("value" + matcher2.group() + rb.getString(key2)));
                         }
-                    } else errorLines++;
+                    } else {
+                        errorLines++;
+                    }
                 } catch (Exception e) {
                     errorLines++;
                 }
             }
         }
-        strResult.append(SUM).append(result);
+        strResult.append(result);
         System.out.println(result);
         System.out.println(errorLines);
         return errorLines;
     }
 
     @Test
-    public void testMainCase1() {
+    public void testMainCase1() throws MissingResourceException {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in", result);
         Assertions.assertEquals(3, errorLines);
-        String expectedIn1 = SUM + "8.24";
-        Assertions.assertEquals(expectedIn1, result.toString());
+        Assertions.assertEquals(8.24, Double.parseDouble(result.toString()));
     }
 
     @Test
-    public void testMainCase2() {
+    public void testMainCase2() throws MissingResourceException {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in1", result);
         Assertions.assertEquals(9, errorLines);
-        String expectedIn1 = SUM + "30.242";
-        Assertions.assertEquals(expectedIn1, result.toString());
+        Assertions.assertEquals(30.242, Double.parseDouble(result.toString()));
     }
 
     @Test
-    public void testMainCase3() {
+    public void testMainCase3() throws MissingResourceException {
         StringBuilder result = new StringBuilder();
         int errorLines = getResult("in3", result);
         Assertions.assertEquals(0, errorLines);
-        String expectedIn1 = SUM + "1.9";
-        Assertions.assertEquals(expectedIn1, result.toString());
+        Assertions.assertEquals(1.9, Double.parseDouble(result.toString()), 0.000000000000002);
+    }
+
+    @Test(expected = MissingResourceException.class)
+    public void testWrongPropertiesName() throws MissingResourceException {
+        int errorLines = getResult("resources.in4", new StringBuilder());
+
     }
 }
