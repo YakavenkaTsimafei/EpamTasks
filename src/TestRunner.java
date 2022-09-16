@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.Enumeration;
 import java.util.MissingResourceException;
@@ -10,43 +10,40 @@ import java.util.regex.Pattern;
 public class TestRunner {
     final static String SUM = "sum = ";
 
-    private static int getResult(String propertiesName, StringBuilder strResult) throws MissingResourceException {
+    public static int getResult(String propertiesName, StringBuilder strResult) throws MissingResourceException {
         ResourceBundle rb = ResourceBundle.getBundle(propertiesName);
         Enumeration<String> keys = rb.getKeys();
+        final String KEY_REG_EXP = "index(.*)";
+        final String NUM_REG_EXP = "[1-9]\\d*";
+        final int TAIL_INDEX = 1;
+        final String VALUE = "value";
         String key;
-        String key1;
-        String key2;
-        double result = 0;
         int errorLines = 0;
+        double result = 0;
         while (keys.hasMoreElements()) {
             key = keys.nextElement();
-            Pattern pattern = Pattern.compile("index.*");
-            Matcher matcher = pattern.matcher(key);
-            if (matcher.matches()) {
-                try {
-                    key1 = key;
-                    Pattern pattern1 = Pattern.compile("index[1-9]+\\d*");
-                    Matcher matcher1 = pattern1.matcher(key1);
-                    Pattern pattern3 = Pattern.compile("^[1-9]+\\d*");
-                    Matcher matcher3 = pattern3.matcher(rb.getString(key1));
-                    if (matcher1.matches() && matcher3.matches()) {
-                        key2 = key1;
-                        Pattern pattern2 = Pattern.compile("\\d+");
-                        Matcher matcher2 = pattern2.matcher(key2);
-                        while (matcher2.find()) {
-                            Integer.parseInt(matcher2.group());
-                            Double.parseDouble(rb.getString(key2));
-                            Double.parseDouble(matcher2.group() + rb.getString(key2));
-                            result += Double.parseDouble(rb.getString("value" + matcher2.group() + rb.getString(key2)));
-                        }
-                    } else {
+            Pattern pattern = Pattern.compile(KEY_REG_EXP);
+            Matcher keyMatcher = pattern.matcher(key);
+            if (keyMatcher.matches()) {
+                String iStr = keyMatcher.group(TAIL_INDEX);
+                String jStr = rb.getString(key).trim();
+                Pattern pattern1 = Pattern.compile(NUM_REG_EXP);
+                Matcher iMatcher = pattern1.matcher(iStr);
+                Pattern pattern3 = Pattern.compile(NUM_REG_EXP);
+                Matcher jMatcher = pattern3.matcher(rb.getString(key));
+                if (iMatcher.matches() && jMatcher.matches()) {
+                    String valueIJ = VALUE + iStr + jStr;
+                    try {
+                        result += Double.parseDouble(rb.getString(valueIJ));
+                    } catch (Exception e) {
                         errorLines++;
                     }
-                } catch (Exception e) {
+                } else {
                     errorLines++;
                 }
             }
         }
+
         strResult.append(result);
         System.out.println(result);
         System.out.println(errorLines);
@@ -55,26 +52,47 @@ public class TestRunner {
 
     @Test
     public void testMainCase1() throws MissingResourceException {
-        StringBuilder result = new StringBuilder();
-        int errorLines = getResult("in", result);
-        Assertions.assertEquals(3, errorLines);
-        Assertions.assertEquals(8.24, Double.parseDouble(result.toString()));
-    }
 
-    @Test
-    public void testMainCase2() throws MissingResourceException {
-        StringBuilder result = new StringBuilder();
-        int errorLines = getResult("in1", result);
-        Assertions.assertEquals(9, errorLines);
-        Assertions.assertEquals(30.242, Double.parseDouble(result.toString()));
-    }
+        class TestCase {
+            private final String name;
+            private final StringBuilder result;
 
-    @Test
-    public void testMainCase3() throws MissingResourceException {
-        StringBuilder result = new StringBuilder();
-        int errorLines = getResult("in3", result);
-        Assertions.assertEquals(0, errorLines);
-        Assertions.assertEquals(1.9, Double.parseDouble(result.toString()), 0.000000000000002);
+            public TestCase(String name, StringBuilder result) {
+                this.name = name;
+                this.result = result;
+            }
+
+            public int getErrorLines() {
+                return getResult(name, result);
+            }
+
+            public double getRes() {
+                return Double.parseDouble(result.toString());
+            }
+
+        }
+
+        TestCase[] testCases = {
+                new TestCase("in", new StringBuilder()),
+                new TestCase("in1", new StringBuilder()),
+                new TestCase("in2", new StringBuilder())};
+
+        String[] filenames = {
+                "in1", "in2", "in3"
+        };
+        int[] expectedErrors = {
+                3, 9, 0
+        };
+        double[] expectedResults = {
+                8.24, 30.242, 1.9
+        };
+
+        for (int i = 0; i < filenames.length; i++) {
+
+            Assertions.assertEquals(testCases[i].getErrorLines(), expectedErrors[i]);
+            Assertions.assertEquals(testCases[i].getRes(), expectedResults[i], 0.000000000000002);
+
+        }
     }
 
     @Test(expected = MissingResourceException.class)
