@@ -90,7 +90,6 @@ public class TestRunner {
         for (int i = 0; i < filenames.length; i++) {
             Assertions.assertEquals(testCases[i].getErrorLines(), expectedErrors[i]);
             Assertions.assertEquals(testCases[i].getRes(), expectedResults[i], 0.000000000000002);
-
         }
     }
 
