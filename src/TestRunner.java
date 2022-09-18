@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 public class TestRunner {
 
     public static Result getResult(String propertiesName) throws MissingResourceException {
-        StringBuilder strResult = new StringBuilder();
         ResourceBundle rb = ResourceBundle.getBundle(propertiesName);
         Enumeration<String> keys = rb.getKeys();
         final String KEY_REG_EXP = "index(.*)";
@@ -43,11 +42,6 @@ public class TestRunner {
                 }
             }
         }
-
-        strResult.append(result);
-        System.out.println(result);
-        System.out.println(errorLines);
-
         return new Result(errorLines, result);
 
     }
@@ -79,6 +73,7 @@ public class TestRunner {
     }
 
     private class TestCase {
+        private static final String SEPARATOR = ";";
         private final String name;
         private final int error;
         private final double result;
@@ -107,11 +102,14 @@ public class TestRunner {
 
         @Override
         public String toString() {
-            return name + ";" + error + ";" + result;
+            return name + SEPARATOR + error + SEPARATOR + result;
         }
     }
 
     private static class Result {
+        private static final String SUM_EQUALS = "sum = ";
+        private static final String ERROR_LINES_EQUAL = "error_lines = ";
+        private static final String NEXT_LINE = "\n";
         private final int error;
         private final double result;
 
@@ -134,7 +132,7 @@ public class TestRunner {
 
         @Override
         public String toString() {
-            return "sum = " + error + "\n" + "error_lines" + result;
+            return SUM_EQUALS + error + NEXT_LINE + ERROR_LINES_EQUAL + result;
         }
     }
 
