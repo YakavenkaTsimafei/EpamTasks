@@ -75,7 +75,7 @@ public class TestRunner {
         private final Result result;
 
         public TestCase() {
-            this(null);
+            this(new Result(0, 0.0));
         }
 
         public TestCase(Result result) {
