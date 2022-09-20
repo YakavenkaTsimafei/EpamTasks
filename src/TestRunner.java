@@ -20,9 +20,8 @@ public class TestRunner {
         final String VALUE = "value";
         int errorLines = 0;
         double result = 0;
-        String key;
         while (keys.hasMoreElements()) {
-            key = keys.nextElement();
+            String key = keys.nextElement();
             Matcher keyMatcher = pattern.matcher(key);
             if (keyMatcher.matches()) {
                 String iStr = keyMatcher.group(TAIL_INDEX);
@@ -50,9 +49,9 @@ public class TestRunner {
     public void testMainCase1() throws MissingResourceException {
 
         TestCase[] testCases = {
-                new TestCase("in1", 3, 8.24),
-                new TestCase("in2", 9, 30.242),
-                new TestCase("in3", 0, 1.9)
+                new TestCase(new Result(3, 8.24)),
+                new TestCase(new Result(9, 30.242)),
+                new TestCase(new Result(0, 1.9))
         };
         Result[] results = {
                 getResult("in1"),
@@ -60,7 +59,6 @@ public class TestRunner {
                 getResult("in3")
         };
         for (int i = 0; i < testCases.length; i++) {
-            Assertions.assertEquals(testCases[i].getName(), "in" + (i + 1));
             Assertions.assertEquals(testCases[i].getError(), results[i].error);
             Assertions.assertEquals(testCases[i].getResult(), results[i].result, 0.000000000000002);
         }
@@ -74,36 +72,25 @@ public class TestRunner {
 
     private class TestCase {
         private static final String SEPARATOR = ";";
-        private final String name;
-        private final int error;
-        private final double result;
+        private final Result result;
 
         public TestCase() {
-            this(null, 0, 0.00);
+            this(null);
         }
 
-        public TestCase(String name, int error, double result) {
-            this.name = name;
-            this.error = error;
+        public TestCase(Result result) {
+
             this.result = result;
         }
 
-        public String getName() {
-            return name;
-        }
-
         public int getError() {
-            return error;
+            return result.getError();
         }
 
         public double getResult() {
-            return result;
+            return result.getResult();
         }
 
-        @Override
-        public String toString() {
-            return name + SEPARATOR + error + SEPARATOR + result;
-        }
     }
 
     private static class Result {
