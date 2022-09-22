@@ -53,11 +53,7 @@ public class TestRunner {
                 new TestCase(new Result(9, 30.242)),
                 new TestCase(new Result(0, 1.9))
         };
-        Result[] results = {
-                getResult("in1"),
-                getResult("in2"),
-                getResult("in3")
-        };
+
         for (int i = 0; i < testCases.length; i++) {
             Assertions.assertEquals(testCases[i].getError(), results[i].error);
             Assertions.assertEquals(testCases[i].getResult(), results[i].result, 0.000000000000002);
