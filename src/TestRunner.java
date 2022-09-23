@@ -52,7 +52,6 @@ public class TestRunner {
                 new TestCase(new Result(9, 30.242), "fileWithInformation2"),
                 new TestCase(new Result(0, 1.9), "fileWithInformation3")
         };
-        int counter = 0;
         for (TestCase testCase : testCases) {
             Assertions.assertEquals(testCase.getError(), getResult(testCase.getFileName()).getError());
             Assertions.assertEquals(testCase.getResult(), getResult(testCase.getFileName()).getResult(), 0.000000000000002);
@@ -66,7 +65,6 @@ public class TestRunner {
     }
 
     private class TestCase {
-        private static final String SEPARATOR = ";";
         private final Result result;
         private final String fileName;
 
