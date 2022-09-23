@@ -48,14 +48,14 @@ public class TestRunner {
     public void testMainCase1() throws MissingResourceException {
 
         TestCase[] testCases = {
-                new TestCase(new Result(3, 8.24)),
-                new TestCase(new Result(9, 30.242)),
-                new TestCase(new Result(0, 1.9))
+                new TestCase(new Result(3, 8.24), "fileWithInformation1"),
+                new TestCase(new Result(9, 30.242), "fileWithInformation2"),
+                new TestCase(new Result(0, 1.9), "fileWithInformation3")
         };
         int counter = 0;
         for (TestCase testCase : testCases) {
-            Assertions.assertEquals(testCase.getError(), getResult("in" + ++counter).getError());
-            Assertions.assertEquals(testCase.getResult(), getResult("in" + counter).getResult(), 0.000000000000002);
+            Assertions.assertEquals(testCase.getError(), getResult(testCase.getFileName()).getError());
+            Assertions.assertEquals(testCase.getResult(), getResult(testCase.getFileName()).getResult(), 0.000000000000002);
         }
 
     }
@@ -68,14 +68,15 @@ public class TestRunner {
     private class TestCase {
         private static final String SEPARATOR = ";";
         private final Result result;
+        private final String fileName;
 
         public TestCase() {
-            this(new Result(0, 0.0));
+            this(new Result(0, 0.0), null);
         }
 
-        public TestCase(Result result) {
-
+        public TestCase(Result result, String filename) {
             this.result = result;
+            this.fileName = filename;
         }
 
         public int getError() {
@@ -84,6 +85,10 @@ public class TestRunner {
 
         public double getResult() {
             return result.getResult();
+        }
+
+        public String getFileName() {
+            return fileName;
         }
 
     }
