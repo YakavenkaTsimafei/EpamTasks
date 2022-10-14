@@ -1,34 +1,38 @@
 package by.epam.lab;
 
-import java.util.Scanner;
+public class Purchase implements Comparable<Purchase> {
 
-public class Purchase {
-    private static final String SEPARATOR = ";";
     private final String name;
-    private final int price;
+    private final Byn price;
     private final int number;
 
     public Purchase() {
-        this(null, 0, 0);
+        this(null, new Byn(), 0);
     }
 
-    public Purchase(Scanner sc) {
-        this.name = sc.next();
-        this.price = sc.nextInt();
-        this.number = sc.nextInt();
-    }
-
-    public Purchase(String name, int price, int number) {
+    public Purchase(String name, Byn price, int number) {
         this.name = name;
         this.price = price;
         this.number = number;
+    }
+
+    public Purchase(String[] strings) {
+        if (strings.length != 3) {
+            throw new IllegalArgumentException();
+        }
+        name = strings[0];
+        price = new Byn(Integer.parseInt(strings[1]));
+        number = Integer.parseInt(strings[2]);
+        if (name.equals("") || price.getValue() <= 0 || number <= 0) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public String getName() {
         return name;
     }
 
-    public int getPrice() {
+    public Byn getPrice() {
         return price;
     }
 
@@ -36,16 +40,23 @@ public class Purchase {
         return number;
     }
 
-    public int getCost() {
-        return price * number;
+    public Byn getCost() {
+        return new Byn(price).mul(number);
     }
 
     protected String fieldsToString() {
-        return name + SEPARATOR + price + SEPARATOR + number;
+        return name + Constants.SEPARATOR + price + Constants.SEPARATOR + number;
     }
 
     @Override
     public String toString() {
-        return fieldsToString() + SEPARATOR + getCost();
+        return fieldsToString() + Constants.SEPARATOR + getCost();
     }
+
+    @Override
+    public int compareTo(Purchase o) {
+        return 0;
+    }
+
+
 }

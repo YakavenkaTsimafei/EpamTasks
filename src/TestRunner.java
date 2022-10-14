@@ -1,77 +1,85 @@
-import by.epam.lab.PriceDiscountPurchase;
+import by.epam.lab.Byn;
 import by.epam.lab.Purchase;
 import by.epam.lab.PurchaseList;
+import by.epam.lab.PurchasesFactory;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 
 public class TestRunner {
     @Test
     public void testAddingANewPurchase() {
-        List<Purchase> list = new ArrayList<>();
-        PurchaseList purchaseList = new PurchaseList("information.txt", list);
-        purchaseList.dataOutput();
-        System.out.println(purchaseList.getPurchaseList());
-        List<Purchase> listToCheck = new ArrayList<>(list);
-        Purchase purchaseToAdd = new Purchase("water", 50, 5);
-        Purchase purchaseToAdd1 = new PriceDiscountPurchase("cheese", 20, 3, 10);
-        Purchase purchaseToAdd2 = new PriceDiscountPurchase("tomatoes", 50, 2, 100);
-        listToCheck.add(1, purchaseToAdd);
-        purchaseList.addingANewPurchase(1, purchaseToAdd);
-        listToCheck.add(9, purchaseToAdd1);
-        purchaseList.addingANewPurchase(99, purchaseToAdd1);
-        purchaseList.addingANewPurchase(2, purchaseToAdd2);
-        Assertions.assertEquals(listToCheck, list);
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        purchaseList.addingANewPurchase(12, new Purchase("bread", new Byn(60), 6));
+        purchaseList.addingANewPurchase(5, new Purchase("cheese", new Byn(50), 2));
+        purchaseList.addingANewPurchase(-2, new Purchase("water", new Byn(60), 6));
+        Assertions.assertEquals("water;0.60;6;3.60", purchaseList.getPurchaseList().get(0).toString());
+        Assertions.assertEquals("cheese;0.50;2;1.00", purchaseList.getPurchaseList().get(6).toString());
+        Assertions.assertEquals("bread;0.60;6;3.60", purchaseList.getPurchaseList().get(10).toString());
+
     }
 
     @Test
     public void testRemovingFromTheGap() {
-        List<Purchase> list = new ArrayList<>();
-        List<Purchase> listToCheck = new ArrayList<>();
-        PurchaseList purchaseList = new PurchaseList("information.txt", list);
-        PurchaseList purchaseList1 = new PurchaseList("information.txt", listToCheck);
-        purchaseList.dataOutput();
-        purchaseList.getPurchaseList();
-        purchaseList1.getPurchaseList();
-        purchaseList.removingFromTheGap(1, 6);
-        purchaseList1.removingFromTheGap(3, 99);
-        Assertions.assertEquals(list.toString(), "[bread;155;1;2;153, butter;341;1;1;340, meat;1100;2;80;2120]");
-        Assertions.assertEquals(listToCheck.toString(), "[bread;155;1;2;153, milk;131;2;262, bread;154;3;462]");
-
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        purchaseList.removingFromTheGap(-1, 2);
+        purchaseList.removingFromTheGap(1, 99);
+        Assertions.assertEquals("bread;1.54;3;4.62", purchaseList.getPurchaseList().get(0).toString());
     }
 
     @Test
     public void testTotalCoast() {
-        List<Purchase> list = new ArrayList<>();
-        PurchaseList purchaseList = new PurchaseList("information.txt", list);
-        purchaseList.dataOutput();
-        System.out.println(purchaseList.getPurchaseList());
-        Assertions.assertEquals(purchaseList.totalCost(), 4782);
-
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        Assertions.assertEquals(4782, purchaseList.totalCost().getValue());
     }
 
     @Test
     public void testSortList() {
-        List<Purchase> list = new ArrayList<>();
-        PurchaseList purchaseList = new PurchaseList("information.txt", list);
-        purchaseList.dataOutput();
-        System.out.println(purchaseList.getPurchaseList());
-        Assertions.assertEquals(purchaseList.sortList().toString(), "[bread;155;1;2;153, butter;370;1;370, butter;341;1;1;340, milk;131;2;262, potato;180;2;10;350, meat;1100;2;80;2120, bread;154;3;462, bread;145;5;725]");
-
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        purchaseList.sortList();
+        Assertions.assertEquals("bread;1.55;1;0.02;1.53", purchaseList.getPurchaseList().get(0).toString());
+        Assertions.assertEquals("bread;1.45;5;7.25", purchaseList.getPurchaseList().get(7).toString());
     }
 
     @Test
     public void testSearchByQuantity() {
-        List<Purchase> list = new ArrayList<>();
-        PurchaseList purchaseList = new PurchaseList("information.txt", list);
-        purchaseList.dataOutput();
-        System.out.println(purchaseList.getPurchaseList());
-        Purchase purchaseForCheck = new Purchase("bread", 154, 3);
-        Assertions.assertEquals(purchaseList.searchByQuantity(3).toString(), purchaseForCheck.toString());
-
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        purchaseList.sortList();
+        Assertions.assertEquals(6, purchaseList.searchByQuantity(3));
     }
 
+    @Test(expected = FileNotFoundException.class)
+    public void testFileNotFoundException() throws FileNotFoundException {
+        Scanner sc = new Scanner(new FileReader("src/in1.csv"));
+        sc.close();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void zeroValues() throws IllegalArgumentException {
+        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("candy;0;2");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void negativeValues() throws IllegalArgumentException {
+        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("candy;-100;-2");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void noValues() throws IllegalArgumentException {
+        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("candy");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void invalidValues() throws IllegalArgumentException {
+        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("candy;100;2;500");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void notIntegerValues() throws IllegalArgumentException {
+        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("water;70;4;0.5");
+    }
 
 }
