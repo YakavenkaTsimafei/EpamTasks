@@ -1,7 +1,5 @@
 package by.epam.lab;
 
-import java.util.Scanner;
-
 
 public class Byn implements Comparable<Byn> {
     private int value;
@@ -14,20 +12,16 @@ public class Byn implements Comparable<Byn> {
         return value;
     }
 
-    public Byn(Scanner sc) {
-        this.value = sc.nextInt();
-    }
-
     public Byn(int value) {
         this.value = value;
     }
 
-    public Byn(int rubs, int coins) {
-        this(rubs * 100 + coins);
-    }
-
     public Byn(Byn byn) {
         this(byn.value);
+    }
+
+    public Byn(int rubs, int coins) {
+        this(rubs * 100 + coins);
     }
 
     public int getRubs() {
@@ -68,7 +62,7 @@ public class Byn implements Comparable<Byn> {
 
     @Override
     public String toString() {
-        return String.format("%d.%02d", getRubs(), getCoins());
+        return String.format(Constants.FOR_OUTPUT, getRubs(), getCoins());
 
     }
 }

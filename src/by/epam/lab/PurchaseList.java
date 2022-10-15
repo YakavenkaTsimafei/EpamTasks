@@ -30,7 +30,7 @@ public class PurchaseList {
     }
 
     public List<Purchase> getPurchaseList() {
-        return purchaseList;
+        return List.copyOf(purchaseList);
     }
 
     public void addingANewPurchase(int index, Purchase newPurchase) {
