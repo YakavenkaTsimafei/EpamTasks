@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class TestRunner {
     @Test
     public void testAddingANewPurchase() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
         purchaseList.addingANewPurchase(12, new Purchase("bread", new Byn(60), 6));
         purchaseList.addingANewPurchase(5, new Purchase("cheese", new Byn(50), 2));
         purchaseList.addingANewPurchase(-2, new Purchase("water", new Byn(60), 6));
@@ -24,7 +24,7 @@ public class TestRunner {
 
     @Test
     public void testRemovingFromTheGap() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
         purchaseList.removingFromTheGap(-1, 2);
         purchaseList.removingFromTheGap(1, 99);
         Assertions.assertEquals("bread;1.54;3;4.62", purchaseList.getPurchaseList().get(0).toString());
@@ -32,13 +32,13 @@ public class TestRunner {
 
     @Test
     public void testTotalCoast() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
         Assertions.assertEquals(4782, purchaseList.totalCost().getValue());
     }
 
     @Test
     public void testSortList() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
         purchaseList.sortList();
         Assertions.assertEquals("bread;1.55;1;0.02;1.53", purchaseList.getPurchaseList().get(0).toString());
         Assertions.assertEquals("bread;1.45;5;7.25", purchaseList.getPurchaseList().get(7).toString());
@@ -46,14 +46,14 @@ public class TestRunner {
 
     @Test
     public void testSearchByQuantity() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\ information.txt");
+        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
         purchaseList.sortList();
         Assertions.assertEquals(6, purchaseList.searchByQuantity(3));
     }
 
     @Test(expected = FileNotFoundException.class)
     public void testFileNotFoundException() throws FileNotFoundException {
-        Scanner sc = new Scanner(new FileReader("src/in1.csv"));
+        Scanner sc = new Scanner(new FileReader("src\\by\\epam\\lab\\information2.txt"));
         sc.close();
     }
 
