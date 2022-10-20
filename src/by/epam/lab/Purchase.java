@@ -16,22 +16,8 @@ public class Purchase implements Comparable<Purchase> {
         this.number = number;
     }
 
-//    public Purchase(String[] fields) {
-//        this(getValidPurchase(fields));
-//    }
-//
-//    private static Purchase getValidPurchase(String[] fields) {
-//        if (fields.length != Constants.THREE_NUMBER) {
-//            throw new ArrayIndexOutOfBoundsException("Wrong args number");
-//        }
-//        return new Purchase(fields[0], new Byn(fields[1]), Integer.parseInt(fields[2]));
-//    }
-//
-//    public Purchase(Purchase purchase) {
-//        this(purchase.getName(), purchase.getPrice(), purchase.getNumber());
-//    }
     public Purchase(String[] strings) {
-        if (strings.length != 3) {
+        if (strings.length != Constants.FOUR_NUMBER) {
             throw new IllegalArgumentException();
         }
         name = strings[0];
@@ -41,8 +27,6 @@ public class Purchase implements Comparable<Purchase> {
             throw new IllegalArgumentException();
         }
     }
-
-
 
     public String getName() {
         return name;
