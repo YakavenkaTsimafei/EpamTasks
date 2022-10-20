@@ -45,6 +45,14 @@ public class TestRunner {
     }
 
     @Test
+    public void testBynStrKops() {
+        Byn byn = new Byn("400");
+        Byn byn1 = new Byn(400);
+        Assertions.assertEquals(byn, byn1);
+
+    }
+
+    @Test
     public void testSearchByQuantity() {
         PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
         purchaseList.sortList();

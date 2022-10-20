@@ -6,13 +6,13 @@ import java.util.*;
 
 public class PurchaseList {
 
-    private List<Purchase> purchaseList = new ArrayList<>();
+    private List<Purchase> purchaseList;
 
     public PurchaseList() {
     }
 
-
     public PurchaseList(String fileName) {
+        purchaseList = new ArrayList<>();
         try (Scanner sc = new Scanner(new FileReader(fileName))) {
             while (sc.hasNextLine()) {
                 Purchase purchaseNow;

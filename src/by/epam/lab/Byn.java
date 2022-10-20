@@ -8,20 +8,24 @@ public class Byn implements Comparable<Byn> {
         this(0);
     }
 
-    public int getValue() {
-        return value;
+    public Byn(int value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("wrong value for Byn: " + value);
+        }
+        this.value = value;
+
     }
 
-    public Byn(int value) {
-        this.value = value;
+    public Byn(int rubs, int coins) {
+        this(getValidValue(rubs, coins));
+    }
+
+    public Byn(String strKops) {
+        this(Integer.parseInt(strKops));
     }
 
     public Byn(Byn byn) {
         this(byn.value);
-    }
-
-    public Byn(int rubs, int coins) {
-        this(rubs * 100 + coins);
     }
 
     public int getRubs() {
@@ -30,6 +34,10 @@ public class Byn implements Comparable<Byn> {
 
     public int getCoins() {
         return this.value % 100;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     public Byn add(Byn byn) {
@@ -45,6 +53,20 @@ public class Byn implements Comparable<Byn> {
     public Byn sub(Byn discount) {
         value -= discount.value;
         return this;
+    }
+
+    private static int getValidValue(int rubs, int coins) {
+        if (rubs < 0) {
+            throw new IllegalArgumentException("Negative rubles");
+        }
+        if (coins < 0) {
+            throw new IllegalArgumentException("Negative kopecks");
+        }
+        if (coins > 100) {
+            throw new IllegalArgumentException("This is already rubles");
+        } else {
+            return 100 * rubs + coins;
+        }
     }
 
     @Override
