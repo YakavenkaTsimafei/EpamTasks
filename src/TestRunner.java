@@ -1,7 +1,8 @@
-import by.epam.lab.Byn;
-import by.epam.lab.Purchase;
-import by.epam.lab.PurchaseList;
 import by.epam.lab.PurchasesFactory;
+import by.epam.lab.bean.Byn;
+import by.epam.lab.bean.Purchase;
+import by.epam.lab.bean.PurchaseList;
+import by.epam.lab.exception.CsvLineException;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -11,8 +12,8 @@ import java.util.Scanner;
 
 public class TestRunner {
     @Test
-    public void testAddingANewPurchase() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
+    public void testAddingANewPurchase() throws CsvLineException {
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
         purchaseList.addingANewPurchase(12, new Purchase("bread", new Byn(60), 6));
         purchaseList.addingANewPurchase(5, new Purchase("cheese", new Byn(50), 2));
         purchaseList.addingANewPurchase(-2, new Purchase("water", new Byn(60), 6));
@@ -24,7 +25,7 @@ public class TestRunner {
 
     @Test
     public void testRemovingFromTheGap() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
         purchaseList.removingFromTheGap(-1, 2);
         purchaseList.removingFromTheGap(1, 99);
         Assertions.assertEquals("bread;1.54;3;4.62", purchaseList.getPurchaseList().get(0).toString());
@@ -32,14 +33,16 @@ public class TestRunner {
 
     @Test
     public void testTotalCoast() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
-        Assertions.assertEquals(4782, purchaseList.totalCost().getValue());
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
+       Assertions.assertEquals(4692, purchaseList.totalCost().getValue());
     }
 
     @Test
     public void testSortList() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
+        System.out.println(purchaseList.getPurchaseList());
         purchaseList.sortList();
+        System.out.println(purchaseList.getPurchaseList());
         Assertions.assertEquals("bread;1.55;1;0.02;1.53", purchaseList.getPurchaseList().get(0).toString());
         Assertions.assertEquals("bread;1.45;5;7.25", purchaseList.getPurchaseList().get(7).toString());
     }
@@ -54,9 +57,10 @@ public class TestRunner {
 
     @Test
     public void testSearchByQuantity() {
-        PurchaseList purchaseList = new PurchaseList("src\\by\\epam\\lab\\information.txt");
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
         purchaseList.sortList();
-        Assertions.assertEquals(6, purchaseList.searchByQuantity(3));
+        System.out.println(purchaseList.getPurchaseList());
+        Assertions.assertEquals(6, purchaseList.searchByQuantity(new Purchase("1",new Byn(1),3)));
     }
 
     @Test(expected = FileNotFoundException.class)
@@ -65,29 +69,29 @@ public class TestRunner {
         sc.close();
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void zeroValues() throws IllegalArgumentException {
-        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("candy;0;2");
+    @Test(expected = CsvLineException.class)
+    public void zeroValues() throws CsvLineException {
+        Purchase purchaseNow = PurchasesFactory.getPurchase("candy;0;2");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void negativeValues() throws IllegalArgumentException {
-        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("candy;-100;-2");
+    @Test(expected = CsvLineException.class)
+    public void negativeValues() throws CsvLineException {
+        Purchase purchaseNow = PurchasesFactory.getPurchase("candy;-100;-2");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void noValues() throws IllegalArgumentException {
-        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("candy");
+    @Test(expected = CsvLineException.class)
+    public void noValues() throws CsvLineException {
+        Purchase purchaseNow = PurchasesFactory.getPurchase("candy");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void invalidValues() throws IllegalArgumentException {
-        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("candy;100;2;500");
+    @Test(expected = CsvLineException.class)
+    public void invalidValues() throws CsvLineException {
+        Purchase purchaseNow = PurchasesFactory.getPurchase("candy;100;2;500");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void notIntegerValues() throws IllegalArgumentException {
-        Purchase purchaseNow = PurchasesFactory.getPurchaseFromFactory("water;70;4;0.5");
+    @Test(expected = CsvLineException.class)
+    public void notIntegerValues() throws CsvLineException {
+        Purchase purchaseNow = PurchasesFactory.getPurchase("water;70;4;0.5");
     }
 
 }

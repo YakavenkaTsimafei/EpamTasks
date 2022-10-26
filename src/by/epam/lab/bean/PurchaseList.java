@@ -1,31 +1,31 @@
-package by.epam.lab;
+package by.epam.lab.bean;
+
+import by.epam.lab.PurchasesFactory;
+import by.epam.lab.exception.CsvLineException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
+import static by.epam.lab.Constants.*;
+
+
 public class PurchaseList {
 
-    private List<Purchase> purchaseList;
-
-    public PurchaseList() {
-    }
+    private final List<Purchase> purchaseList = new ArrayList<>();
 
     public PurchaseList(String fileName) {
-        purchaseList = new ArrayList<>();
+
         try (Scanner sc = new Scanner(new FileReader(fileName))) {
             while (sc.hasNextLine()) {
-                Purchase purchaseNow;
-                String line = sc.nextLine();
                 try {
-                    purchaseNow = PurchasesFactory.getPurchaseFromFactory(line);
-                    purchaseList.add(purchaseNow);
-                } catch (IllegalArgumentException e) {
-                    System.err.println(line);
+                    purchaseList.add(PurchasesFactory.getPurchase(sc.nextLine()));
+                } catch (CsvLineException e) {
+                    System.err.println(e.getMessage());
                 }
             }
         } catch (FileNotFoundException e) {
-            System.err.println(Constants.FILE_NOT_FOUND);
+            System.err.println(FILE_NOT_FOUND);
         }
     }
 
@@ -36,15 +36,15 @@ public class PurchaseList {
     public void addingANewPurchase(int index, Purchase newPurchase) {
         if (index >= purchaseList.size()) {
             purchaseList.add(newPurchase);
-        } else purchaseList.add(Math.max(index, 0), newPurchase);
+        } else purchaseList.add(Math.max(index, VALUE_ZERO), newPurchase);
     }
 
     public void removingFromTheGap(int indexStart, int indexEnd) {
         if (indexEnd >= purchaseList.size()) {
             indexEnd = purchaseList.size();
         }
-        if (indexStart < 0) {
-            indexStart = 0;
+        if (indexStart < VALUE_ZERO) {
+            indexStart = VALUE_ZERO;
         }
         purchaseList.subList(indexStart, indexEnd).clear();
 
@@ -60,13 +60,23 @@ public class PurchaseList {
 
     public void sortList() {
         purchaseList.sort(comparator);
-
     }
 
-    public int searchByQuantity(int quantity) {
-        return Collections.binarySearch(purchaseList, new Purchase(null, new Byn(), quantity), comparator);
+    public int searchByQuantity(Purchase quantity) {
+        return Collections.binarySearch(purchaseList,quantity, comparator);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        for (Purchase purchase : purchaseList) {
+            result.append(purchase).append(SEPARATOR);
+        }
+        if (!purchaseList.isEmpty()) {
+            result.delete(result.length() - SEPARATOR.length(), result.length());
+        }
+        return result.toString();
+    }
 
     static Comparator<Purchase> comparator = new Comparator<Purchase>() {
         @Override
