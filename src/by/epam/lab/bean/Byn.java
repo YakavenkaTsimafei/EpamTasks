@@ -1,19 +1,19 @@
-package by.epam.lab;
+package by.epam.lab.bean;
 
+import static by.epam.lab.Constants.*;
 
 public class Byn implements Comparable<Byn> {
     private int value;
 
-    public Byn() {
-        this(0);
-    }
-
     public Byn(int value) {
         if (value < 0) {
-            throw new IllegalArgumentException("wrong value for Byn: " + value);
+            throw new IllegalArgumentException(WRONG_VALUE_FOR_BYN);
         }
         this.value = value;
+    }
 
+    public Byn() {
+        this(0);
     }
 
     public Byn(int rubs, int coins) {
@@ -29,11 +29,11 @@ public class Byn implements Comparable<Byn> {
     }
 
     public int getRubs() {
-        return this.value / 100;
+        return this.value / VALUE_HUNDRED;
     }
 
     public int getCoins() {
-        return this.value % 100;
+        return this.value % VALUE_HUNDRED;
     }
 
     public int getValue() {
@@ -56,22 +56,22 @@ public class Byn implements Comparable<Byn> {
     }
 
     private static int getValidValue(int rubs, int coins) {
-        if (rubs < 0) {
-            throw new IllegalArgumentException("Negative rubles");
+        if (rubs < VALUE_ZERO) {
+            throw new IllegalArgumentException(NEGATIVE_RUBLES);
         }
-        if (coins < 0) {
-            throw new IllegalArgumentException("Negative kopecks");
+        if (coins < VALUE_ZERO) {
+            throw new IllegalArgumentException(NEGATIVE_KOPECKS);
         }
-        if (coins > 100) {
-            throw new IllegalArgumentException("This is already rubles");
+        if (coins > VALUE_HUNDRED) {
+            throw new IllegalArgumentException(THIS_IS_ALREADY_RUBLES);
         } else {
-            return 100 * rubs + coins;
+            return VALUE_HUNDRED * rubs + coins;
         }
     }
 
     @Override
     public int compareTo(Byn o) {
-        return this.value - o.value;
+        return value - o.value;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Byn implements Comparable<Byn> {
 
     @Override
     public String toString() {
-        return String.format(Constants.FOR_OUTPUT, getRubs(), getCoins());
+        return String.format(FOR_OUTPUT, getRubs(), getCoins());
 
     }
 }
