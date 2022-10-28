@@ -13,9 +13,11 @@ import static by.epam.lab.Constants.*;
 public class PurchaseList {
 
     private final List<Purchase> purchaseList = new ArrayList<>();
+    private final Comparator<Purchase> comparator;
+    private boolean isSorted;
 
-    public PurchaseList(String fileName) {
-
+    public PurchaseList(String fileName, Comparator<Purchase> comparator) {
+        this.comparator = comparator;
         try (Scanner sc = new Scanner(new FileReader(fileName))) {
             while (sc.hasNextLine()) {
                 try {
@@ -26,7 +28,12 @@ public class PurchaseList {
             }
         } catch (FileNotFoundException e) {
             System.err.println(FILE_NOT_FOUND);
+            isSorted = true;
         }
+    }
+
+    public boolean isSorted() {
+        return isSorted;
     }
 
     public List<Purchase> getPurchaseList() {
@@ -37,6 +44,7 @@ public class PurchaseList {
         if (index >= purchaseList.size()) {
             purchaseList.add(newPurchase);
         } else purchaseList.add(Math.max(index, VALUE_ZERO), newPurchase);
+        isSorted = false;
     }
 
     public void removingFromTheGap(int indexStart, int indexEnd) {
@@ -59,11 +67,15 @@ public class PurchaseList {
     }
 
     public void sortList() {
-        purchaseList.sort(comparator);
+            if (!isSorted) {
+                purchaseList.sort(comparator);
+                isSorted = true;
+            }
     }
 
     public int searchByQuantity(Purchase quantity) {
-        return Collections.binarySearch(purchaseList,quantity, comparator);
+        sortList();
+        return Collections.binarySearch(purchaseList, quantity, comparator);
     }
 
     @Override
@@ -78,10 +90,4 @@ public class PurchaseList {
         return result.toString();
     }
 
-    static Comparator<Purchase> comparator = new Comparator<Purchase>() {
-        @Override
-        public int compare(Purchase left, Purchase right) {
-            return left.getNumber() - right.getNumber();
-        }
-    };
 }

@@ -3,7 +3,7 @@ package by.epam.lab.bean;
 import static by.epam.lab.Constants.*;
 
 public class Byn implements Comparable<Byn> {
-    private int value;
+    private final int value;
 
     public Byn(int value) {
         if (value < 0) {
@@ -41,18 +41,15 @@ public class Byn implements Comparable<Byn> {
     }
 
     public Byn add(Byn byn) {
-        value += byn.value;
-        return this;
+        return new Byn(value + byn.value);
     }
 
     public Byn mul(int number) {
-        value *= number;
-        return this;
+        return new Byn(value * number);
     }
 
     public Byn sub(Byn discount) {
-        value -= discount.value;
-        return this;
+        return new Byn(value - discount.value);
     }
 
     private static int getValidValue(int rubs, int coins) {

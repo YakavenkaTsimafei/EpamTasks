@@ -54,7 +54,7 @@ public class Purchase implements Comparable<Purchase> {
     }
 
     public Byn getCost() {
-        return new Byn(price).mul(number);
+        return price.mul(number);
     }
 
     protected String fieldsToString() {
@@ -70,6 +70,4 @@ public class Purchase implements Comparable<Purchase> {
     public int compareTo(Purchase purchase) {
         return getCost().compareTo(purchase.getCost());
     }
-
-
 }

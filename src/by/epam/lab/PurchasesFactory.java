@@ -4,28 +4,34 @@ import by.epam.lab.bean.PriceDiscountPurchase;
 import by.epam.lab.bean.Purchase;
 import by.epam.lab.exception.CsvLineException;
 
+import static by.epam.lab.Constants.PURCHASE_FIELDS_NUMBER;
+
 public class PurchasesFactory {
     private enum PurchaseKind {
         GENERAL_PURCHASE {
-            Purchase getPurchase(String[] fields) {
+            public Purchase getPurchase(String[] fields) {
                 return new Purchase(fields);
             }
         },
 
         PRICE_DISCOUNT_PURCHASE {
-            Purchase getPurchase(String[] fields) {
+            public Purchase getPurchase(String[] fields) {
                 return new PriceDiscountPurchase(fields);
             }
         };
 
-        abstract Purchase getPurchase(String[] csvLine);
+        protected abstract Purchase getPurchase(String[] csvLine);
+    }
+
+    private static PurchaseKind getPurchaseKind(int length) {
+        return PurchaseKind.values()[length - PURCHASE_FIELDS_NUMBER];
     }
 
     public static Purchase getPurchase(String fields) throws CsvLineException {
         String[] value = fields.split(Constants.SEPARATOR);
         try {
-            PurchaseKind kind = (value.length == Constants.FOUR_NUMBER) ? PurchaseKind.PRICE_DISCOUNT_PURCHASE : PurchaseKind.GENERAL_PURCHASE;
-            return kind.getPurchase(value);
+
+            return getPurchaseKind(value.length).getPurchase(value);
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException e) {
             throw new CsvLineException(fields, e);
 

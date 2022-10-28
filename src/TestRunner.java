@@ -8,12 +8,20 @@ import org.junit.jupiter.api.Assertions;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class TestRunner {
+    static Comparator<Purchase> comparator = new Comparator<Purchase>() {
+        @Override
+        public int compare(Purchase left, Purchase right) {
+            return left.getNumber() - right.getNumber();
+        }
+    };
+
     @Test
     public void testAddingANewPurchase() throws CsvLineException {
-        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
         purchaseList.addingANewPurchase(12, new Purchase("bread", new Byn(60), 6));
         purchaseList.addingANewPurchase(5, new Purchase("cheese", new Byn(50), 2));
         purchaseList.addingANewPurchase(-2, new Purchase("water", new Byn(60), 6));
@@ -25,7 +33,7 @@ public class TestRunner {
 
     @Test
     public void testRemovingFromTheGap() {
-        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
         purchaseList.removingFromTheGap(-1, 2);
         purchaseList.removingFromTheGap(1, 99);
         Assertions.assertEquals("bread;1.54;3;4.62", purchaseList.getPurchaseList().get(0).toString());
@@ -33,13 +41,13 @@ public class TestRunner {
 
     @Test
     public void testTotalCoast() {
-        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
-       Assertions.assertEquals(4692, purchaseList.totalCost().getValue());
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
+        Assertions.assertEquals(4692, purchaseList.totalCost().getValue());
     }
 
     @Test
     public void testSortList() {
-        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
         System.out.println(purchaseList.getPurchaseList());
         purchaseList.sortList();
         System.out.println(purchaseList.getPurchaseList());
@@ -57,10 +65,10 @@ public class TestRunner {
 
     @Test
     public void testSearchByQuantity() {
-        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt");
+        PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
         purchaseList.sortList();
         System.out.println(purchaseList.getPurchaseList());
-        Assertions.assertEquals(6, purchaseList.searchByQuantity(new Purchase("1",new Byn(1),3)));
+        Assertions.assertEquals(6, purchaseList.searchByQuantity(new Purchase("1", new Byn(1), 3)));
     }
 
     @Test(expected = FileNotFoundException.class)
