@@ -36,9 +36,6 @@ public class Byn implements Comparable<Byn> {
         return this.value % VALUE_HUNDRED;
     }
 
-    public int getValue() {
-        return value;
-    }
 
     public Byn add(Byn byn) {
         return new Byn(value + byn.value);

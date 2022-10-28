@@ -15,44 +15,43 @@ public class TestRunner {
     static Comparator<Purchase> comparator = new Comparator<Purchase>() {
         @Override
         public int compare(Purchase left, Purchase right) {
-            return left.getNumber() - right.getNumber();
+            return left.getCost().compareTo(right.getCost());
         }
     };
 
     @Test
     public void testAddingANewPurchase() throws CsvLineException {
         PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
+        Assertions.assertNotEquals("[water;0.60;6;3.60, bread;1.55;1;0.02;1.53, milk;1.31;2;2.62, bread;1.54;3;4.62, bread;1.45;5;7.25, potato;1.80;2;0.10;3.40, cheese;0.50;2;1.00, butter;3.70;1;3.70, butter;3.41;1;0.01;3.40, meat;11.00;2;0.80;20.40, bread;0.60;6;3.60]", purchaseList.getPurchaseList().toString());
         purchaseList.addingANewPurchase(12, new Purchase("bread", new Byn(60), 6));
         purchaseList.addingANewPurchase(5, new Purchase("cheese", new Byn(50), 2));
         purchaseList.addingANewPurchase(-2, new Purchase("water", new Byn(60), 6));
-        Assertions.assertEquals("water;0.60;6;3.60", purchaseList.getPurchaseList().get(0).toString());
-        Assertions.assertEquals("cheese;0.50;2;1.00", purchaseList.getPurchaseList().get(6).toString());
-        Assertions.assertEquals("bread;0.60;6;3.60", purchaseList.getPurchaseList().get(10).toString());
-
+        System.out.println(purchaseList.getPurchaseList());
+        Assertions.assertEquals("[water;0.60;6;3.60, bread;1.55;1;0.02;1.53, milk;1.31;2;2.62, bread;1.54;3;4.62, bread;1.45;5;7.25, potato;1.80;2;0.10;3.40, cheese;0.50;2;1.00, butter;3.70;1;3.70, butter;3.41;1;0.01;3.40, meat;11.00;2;0.80;20.40, bread;0.60;6;3.60]", purchaseList.getPurchaseList().toString());
     }
 
     @Test
     public void testRemovingFromTheGap() {
         PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
+        Assertions.assertNotEquals("bread;1.54;3;4.62", purchaseList.getPurchaseList().toString());
         purchaseList.removingFromTheGap(-1, 2);
         purchaseList.removingFromTheGap(1, 99);
-        Assertions.assertEquals("bread;1.54;3;4.62", purchaseList.getPurchaseList().get(0).toString());
+        Assertions.assertEquals("[bread;1.54;3;4.62]", purchaseList.getPurchaseList().toString());
     }
 
     @Test
     public void testTotalCoast() {
         PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
-        Assertions.assertEquals(4692, purchaseList.totalCost().getValue());
+        Assertions.assertEquals("46.92", purchaseList.totalCost().toString());
     }
 
     @Test
     public void testSortList() {
         PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
-        System.out.println(purchaseList.getPurchaseList());
+        Assertions.assertNotEquals("[bread;1.55;1;0.02;1.53, milk;1.31;2;2.62, potato;1.80;2;0.10;3.40, butter;3.41;1;0.01;3.40, butter;3.70;1;3.70, bread;1.54;3;4.62, bread;1.45;5;7.25, meat;11.00;2;0.80;20.40]", purchaseList.getPurchaseList().toString());
         purchaseList.sortList();
-        System.out.println(purchaseList.getPurchaseList());
-        Assertions.assertEquals("bread;1.55;1;0.02;1.53", purchaseList.getPurchaseList().get(0).toString());
-        Assertions.assertEquals("bread;1.45;5;7.25", purchaseList.getPurchaseList().get(7).toString());
+        Assertions.assertEquals("[bread;1.55;1;0.02;1.53, milk;1.31;2;2.62, potato;1.80;2;0.10;3.40, butter;3.41;1;0.01;3.40, butter;3.70;1;3.70, bread;1.54;3;4.62, bread;1.45;5;7.25, meat;11.00;2;0.80;20.40]", purchaseList.getPurchaseList().toString());
+
     }
 
     @Test
@@ -68,7 +67,7 @@ public class TestRunner {
         PurchaseList purchaseList = new PurchaseList("C:\\Users\\timmy\\IdeaProjects\\EpamTasks\\src\\information.txt", comparator);
         purchaseList.sortList();
         System.out.println(purchaseList.getPurchaseList());
-        Assertions.assertEquals(6, purchaseList.searchByQuantity(new Purchase("1", new Byn(1), 3)));
+        Assertions.assertEquals(4, purchaseList.searchByQuantity(new Purchase("1", new Byn(370), 1)));
     }
 
     @Test(expected = FileNotFoundException.class)

@@ -67,15 +67,15 @@ public class PurchaseList {
     }
 
     public void sortList() {
-            if (!isSorted) {
-                purchaseList.sort(comparator);
-                isSorted = true;
-            }
+        if (!isSorted) {
+            purchaseList.sort(comparator);
+            isSorted = true;
+        }
     }
 
-    public int searchByQuantity(Purchase quantity) {
+    public int searchByQuantity(Purchase key) {
         sortList();
-        return Collections.binarySearch(purchaseList, quantity, comparator);
+        return Collections.binarySearch(purchaseList, key, comparator);
     }
 
     @Override
