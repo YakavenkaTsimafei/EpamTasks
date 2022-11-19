@@ -40,6 +40,6 @@ public class Purchase {
 
     @Override
     public String toString() {
-        return product + SEPARATOR + quantity + SEPARATOR + getCost();
+        return product + SEPARATOR + quantity + SEPARATOR;
     }
 }
