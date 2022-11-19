@@ -9,9 +9,10 @@ public class Service implements Sale {
     private final Byn totalCost;
     private final int numberOfUsers;
 
-    public Service(){
-        this(null,new Byn(),0);
+    public Service() {
+        this(null, new Byn(), 0);
     }
+
     public Service(String name, Byn totalCost, int numberOfUsers) {
         this.name = name;
         this.totalCost = totalCost;
