@@ -25,7 +25,7 @@ public class Service implements Sale {
 
 
     public Byn getPrice() {
-        return totalCost.mul(numberOfUsers);
+        return totalCost.div(numberOfUsers);
     }
 
     public int getNumberOfUsers() {
