@@ -2,8 +2,11 @@ package by.epam.lab.bean;
 
 import by.epam.lab.RoundMethod;
 
-public class Byn {
-    private final double value;
+import static by.epam.lab.Constant.FOR_OUTPUT;
+import static by.epam.lab.Constant.HUNDRED;
+
+public class Byn implements Comparable<Byn> {
+    private final int value;
 
     public Byn() {
         this(0);
@@ -13,20 +16,20 @@ public class Byn {
         this(byn.value);
     }
 
-    public Byn(double value) {
+    public Byn(int value) {
         this.value = value;
     }
 
     public Byn(int rubs, int coins) {
-        this(rubs * 100 + coins);
+        this(rubs * HUNDRED + coins);
     }
 
-    public double getRubs() {
-        return value / 100;
+    public int getRubs() {
+        return value / HUNDRED;
     }
 
-    public double getCoins() {
-        return value % 100;
+    public int getCoins() {
+        return value % HUNDRED;
     }
 
     public Byn add(Byn byn) {
@@ -42,21 +45,33 @@ public class Byn {
         return new Byn(roundMethod.round(value * k, d));
     }
 
-    public Byn sub(Byn discount) {
-        return new Byn(value - discount.value);
+    public Byn sub(Byn byn) {
+        return new Byn(value - byn.value);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Byn byn = (Byn) o;
-        return value == byn.value;
+    public int compareTo(Byn o) {
+        return value - o.value;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Byn other = (Byn) obj;
+        return value == other.value;
     }
 
     @Override
     public String toString() {
-        return String.valueOf(value);
-
+        return String.format(FOR_OUTPUT, getRubs(), getCoins());
     }
+
 }

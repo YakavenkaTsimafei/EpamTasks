@@ -1,5 +1,7 @@
 package by.epam.lab.bean;
 
+import static by.epam.lab.Constant.*;
+
 public class PurchaseUtils {
     private final Purchase purchase;
 
@@ -21,11 +23,12 @@ public class PurchaseUtils {
 
     public void printCost() {
 
-        System.out.println(purchase.getCost());
+        System.out.println(COST + purchase.getCost());
     }
 
-    public void printCostDiff(Purchase p) {
-        System.out.println("xxx diff = " + this.purchase.getCost().sub(p.getCost()) + " BYN");
+    public String printCostDiff(Purchase p) {
+        int sign = purchase.getCost().compareTo(p.getCost());
+        return (sign != 0 ? (sign > 0 ? POSITIVE : NEGATIVE) : "") + DIFF + new Byn(Math.abs(sign)) + BYN;
     }
 
     public void printEqual(Purchase[] p) {
