@@ -32,15 +32,6 @@ public class Byn implements Comparable<Byn> {
         return value % HUNDRED;
     }
 
-    public Byn add(Byn byn) {
-        return new Byn(value + byn.value);
-    }
-
-    public Byn mul(int number) {
-
-        return new Byn(value * number);
-    }
-
     public Byn mul(double k, RoundMethod roundMethod, int d) {
         return new Byn(roundMethod.round(value * k, d));
     }
@@ -56,21 +47,6 @@ public class Byn implements Comparable<Byn> {
     @Override
     public int compareTo(Byn o) {
         return value - o.value;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Byn other = (Byn) obj;
-        return value == other.value;
     }
 
     @Override

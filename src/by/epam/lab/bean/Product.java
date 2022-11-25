@@ -17,18 +17,21 @@ public class Product implements Sale {
         this.price = cost;
     }
 
-    public String getProductName() {
-        return productName;
-    }
-
     @Override
     public Byn getPrice() {
         return price;
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    protected String fieldsToString() {
+        return productName + SEPARATOR + price;
+    }
+
     @Override
     public String toString() {
-        return productName + SEPARATOR + price;
-
+        return fieldsToString() + SEPARATOR + price;
     }
 }

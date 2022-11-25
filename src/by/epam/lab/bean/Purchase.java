@@ -7,7 +7,7 @@ import static by.epam.lab.Constant.SEPARATOR;
 
 public class Purchase {
     private Sale product;
-    private java.lang.Number quantity;
+    private Number quantity;
 
     public Purchase() {
         this(null, 0.0);
@@ -26,7 +26,7 @@ public class Purchase {
         this.product = product;
     }
 
-    public java.lang.Number getQuantity() {
+    public Number getQuantity() {
         return quantity;
     }
 
@@ -40,6 +40,6 @@ public class Purchase {
 
     @Override
     public String toString() {
-        return product + SEPARATOR + quantity + SEPARATOR;
+        return getClass().getSimpleName() + SEPARATOR + product + SEPARATOR + quantity + SEPARATOR + getCost();
     }
 }

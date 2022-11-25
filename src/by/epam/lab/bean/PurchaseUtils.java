@@ -17,30 +17,45 @@ public class PurchaseUtils {
         return purchase;
     }
 
-    public void printPurchase() {
-        System.out.println(purchase);
+    public Purchase printPurchase() {
+        return purchase;
     }
 
-    public void printCost() {
-
-        System.out.println(COST + purchase.getCost());
+    public String printCost() {
+        return COST + purchase.getCost();
     }
 
-    public String printCostDiff(Purchase p) {
-        int sign = purchase.getCost().compareTo(p.getCost());
-        return (sign != 0 ? (sign > 0 ? POSITIVE : NEGATIVE) : "") + DIFF + new Byn(Math.abs(sign)) + BYN;
-
-    }
-
-    public void printEqual(Purchase[] p) {
-        for (Purchase purchase : p) {
-            if (this.purchase.getCost().equals(purchase.getCost())) {
-                System.out.println("Cost equal");
-            } else System.out.println("Cost not equal");
-
+    public void printCostDiff(Purchase p) {
+        String prefix = "";
+        Byn costDiff = new Byn();
+        int result = purchase.getCost().compareTo(p.getCost());
+        if (result > 0) {
+            prefix = POSITIVE;
+            costDiff = purchase.getCost().sub(p.getCost());
         }
-
+        if (result < 0) {
+            prefix = NEGATIVE;
+            costDiff = p.getCost().sub(purchase.getCost());
+        }
+        System.out.println(DIFF + prefix + costDiff + BYN);
     }
 
+    public void printEqual(Purchase... purchases) {
+        boolean isSameCost = false;
+        Purchase foundPurchase = new Purchase();
+        for (Purchase p : purchases) {
+            if (purchase.getCost().equals(p.getCost())) {
+                isSameCost = true;
+                foundPurchase = p;
+                break;
+            }
+        }
+        if (!isSameCost) {
+            System.out.println("Purchase no found!");
+        } else {
+            System.out.println("Cost equal");
+            System.out.println(foundPurchase);
+        }
+    }
 
 }

@@ -24,7 +24,12 @@ public class DiscountProduct extends Product {
     }
 
     @Override
+    protected String fieldsToString() {
+        return super.fieldsToString() + SEPARATOR + discount;
+    }
+
+    @Override
     public String toString() {
-        return super.toString() + SEPARATOR + discount;
+        return fieldsToString() + SEPARATOR + getPrice();
     }
 }
