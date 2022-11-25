@@ -24,13 +24,12 @@ public class Service implements Sale {
         return name;
     }
 
-
     public Byn getPrice() {
         return totalCost.mul(1.0 / numberOfUsers, RoundMethod.CEIL, 0);
     }
-    
+
     @Override
     public String toString() {
-        return name + SEPARATOR + totalCost + SEPARATOR + numberOfUsers;
+        return name + SEPARATOR + totalCost + SEPARATOR + numberOfUsers + getPrice();
     }
 }

@@ -1,3 +1,4 @@
+import by.epam.lab.Sale;
 import by.epam.lab.bean.*;
 
 public class Runner {
@@ -13,7 +14,8 @@ public class Runner {
         Purchase p3 = new Purchase(new DiscountProduct("Sugar", new Byn(280), new Byn(10)), 60);
         PurchaseUtils pu4 = new PurchaseUtils(new Purchase(new Service("Gym", new Byn(7560), 5), 2.25));
         Purchase p4 = pu4.getPurchase();
-        System.out.println(p4);
+        Sale instance = p4.getProduct();
+        System.out.println(instance);
         System.out.println(pu4.printCost());
         pu2.printEqual(p1, p3, p4);
     }

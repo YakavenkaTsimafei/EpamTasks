@@ -6,8 +6,8 @@ import by.epam.lab.Sale;
 import static by.epam.lab.Constant.SEPARATOR;
 
 public class Purchase {
-    private Sale product;
-    private Number quantity;
+    private final Sale product;
+    private final Number quantity;
 
     public Purchase() {
         this(null, 0.0);
@@ -22,16 +22,8 @@ public class Purchase {
         return product;
     }
 
-    public void setProduct(Sale product) {
-        this.product = product;
-    }
-
     public Number getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
     }
 
     public Byn getCost() {
