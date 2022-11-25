@@ -1,5 +1,6 @@
 package by.epam.lab.bean;
 
+import by.epam.lab.RoundMethod;
 import by.epam.lab.Sale;
 
 import static by.epam.lab.Constant.SEPARATOR;
@@ -25,7 +26,7 @@ public class Service implements Sale {
 
 
     public Byn getPrice() {
-        return totalCost.div(numberOfUsers);
+        return totalCost.mul(1.0 / numberOfUsers, RoundMethod.CEIL, 0);
     }
 
     public int getNumberOfUsers() {

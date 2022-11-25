@@ -29,6 +29,7 @@ public class PurchaseUtils {
     public String printCostDiff(Purchase p) {
         int sign = purchase.getCost().compareTo(p.getCost());
         return (sign != 0 ? (sign > 0 ? POSITIVE : NEGATIVE) : "") + DIFF + new Byn(Math.abs(sign)) + BYN;
+
     }
 
     public void printEqual(Purchase[] p) {
