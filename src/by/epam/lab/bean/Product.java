@@ -32,6 +32,6 @@ public class Product implements Sale {
 
     @Override
     public String toString() {
-        return fieldsToString() + SEPARATOR + price;
+        return fieldsToString();
     }
 }

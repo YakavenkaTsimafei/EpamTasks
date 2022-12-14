@@ -5,7 +5,7 @@ import by.epam.lab.Sale;
 
 import static by.epam.lab.Constant.SEPARATOR;
 
-public class Purchase {
+public class Purchase<T extends Sale, N extends Number> {
     private final Sale product;
     private final Number quantity;
 
@@ -32,6 +32,6 @@ public class Purchase {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + SEPARATOR + product + SEPARATOR + quantity + SEPARATOR + getCost();
+        return getClass().getSimpleName() + SEPARATOR + product + SEPARATOR + quantity + SEPARATOR;
     }
 }

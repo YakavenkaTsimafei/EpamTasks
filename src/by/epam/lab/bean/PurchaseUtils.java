@@ -1,23 +1,25 @@
 package by.epam.lab.bean;
 
+import by.epam.lab.Sale;
+
 import static by.epam.lab.Constant.*;
 
-public class PurchaseUtils {
-    private final Purchase purchase;
+public class PurchaseUtils<T extends Sale, N extends Number> {
+    private final Purchase<T, N> purchase;
 
     public PurchaseUtils() {
-        this(null);
+        purchase = null;
     }
 
-    public PurchaseUtils(Purchase purchase) {
+    public PurchaseUtils(Purchase<T, N> purchase) {
         this.purchase = purchase;
     }
 
-    public Purchase getPurchase() {
+    public Purchase<T, N> getPurchase() {
         return purchase;
     }
 
-    public Purchase printPurchase() {
+    public Purchase<T, N> printPurchase() {
         return purchase;
     }
 
@@ -25,7 +27,7 @@ public class PurchaseUtils {
         return COST + purchase.getCost();
     }
 
-    public void printCostDiff(Purchase p) {
+    public void printCostDiff(Purchase<? extends Sale, ? extends Number> p) {
         String prefix = "";
         Byn costDiff = new Byn();
         int result = purchase.getCost().compareTo(p.getCost());
@@ -40,10 +42,10 @@ public class PurchaseUtils {
         System.out.println(DIFF + prefix + costDiff + BYN);
     }
 
-    public void printEqual(Purchase... purchases) {
+    public void printEqual(Purchase<? extends Sale, ? extends Number>... purchases) {
         boolean isSameCost = false;
-        Purchase foundPurchase = new Purchase();
-        for (Purchase p : purchases) {
+        Purchase<? extends Sale, ? extends Number> foundPurchase = new Purchase<Sale, Number>();
+        for (Purchase<? extends Sale, ? extends Number> p : purchases) {
             if (purchase.getCost().equals(p.getCost())) {
                 isSameCost = true;
                 foundPurchase = p;

@@ -20,6 +20,10 @@ public class Byn implements Comparable<Byn> {
         this.value = value;
     }
 
+    public Byn(String strKops) {
+        this(Integer.parseInt(strKops));
+    }
+
     public Byn(int rubs, int coins) {
         this(rubs * HUNDRED + coins);
     }
