@@ -30,6 +30,6 @@ public class Service implements Sale {
 
     @Override
     public String toString() {
-        return name + SEPARATOR + totalCost + SEPARATOR + numberOfUsers + getPrice();
+        return name + SEPARATOR + totalCost + SEPARATOR + numberOfUsers + SEPARATOR + getPrice();
     }
 }

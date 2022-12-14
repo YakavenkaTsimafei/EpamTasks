@@ -6,23 +6,23 @@ import by.epam.lab.Sale;
 import static by.epam.lab.Constant.SEPARATOR;
 
 public class Purchase<T extends Sale, N extends Number> {
-    private final Sale product;
-    private final Number quantity;
+    private final T product;
+    private final N quantity;
 
     public Purchase() {
-        this(null, 0.0);
+        this(null, null);
     }
 
-    public Purchase(Sale product, double quantity) {
+    public Purchase(T product, N quantity) {
         this.product = product;
         this.quantity = quantity;
     }
 
-    public Sale getProduct() {
+    public T getProduct() {
         return product;
     }
 
-    public Number getQuantity() {
+    public N getQuantity() {
         return quantity;
     }
 
